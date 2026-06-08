@@ -31,7 +31,7 @@ const PHOTOS = {
   // One image shown full-screen behind your name on the homepage.
   // Replace with your best shot.
   hero: [
-    { src: "hero.svg", alt: "Hero background photo" },
+    { src: "ChatGPT Image Jun 6, 2026, 12_54_08 PM.png", alt: "Hero background photo" },
   ],
 
   // ── MY FAVORITES ─────────────────────────────────────────
