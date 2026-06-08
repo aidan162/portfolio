@@ -4,6 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Aidan Arria</title>
+<!-- FAVICON: upload your logo as favicon.png into your images/ folder -->
+<link rel="icon" type="image/png" href="images/favicon.png">
+<link rel="apple-touch-icon" href="images/favicon.png">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -834,121 +837,104 @@
 </div>
 
 
+<!-- Photo manifest — edit js/photos.js to add/change photos -->
+<script src="js/photos.js"></script>
+
 <script>
-  /* ─── Data: categories and their projects ─── */
-  const CATEGORIES = {
-    portraiture: {
-      label: 'Portrait',
-      title: 'Portraiture',
-      num: '02.1',
-      gradient: ['#352820','#4a3020','#3d2818','#402a1c','#382214'],
-      projects: [
-        { title: 'Studio Series', sub: '2024', grad: 'linear-gradient(150deg,#1a1410 0%,#352820 100%)' },
-        { title: 'Natural Light', sub: '2024', grad: 'linear-gradient(140deg,#1c1210 0%,#3a2618 100%)' },
-        { title: 'Senior Portraits', sub: '2023', grad: 'linear-gradient(130deg,#201614 0%,#402c20 100%)' },
-        { title: 'Street Faces', sub: '2023', grad: 'linear-gradient(160deg,#181210 0%,#2e2018 100%)' },
-      ]
-    },
-    nature: {
-      label: 'Landscape',
-      title: 'Nature',
-      num: '02.2',
-      projects: [
-        { title: 'Desert Light', sub: '2024', grad: 'linear-gradient(150deg,#141c14 0%,#253820 100%)' },
-        { title: 'Monsoon Season', sub: '2024', grad: 'linear-gradient(140deg,#121a10 0%,#203015 100%)' },
-        { title: 'Mountain Trails', sub: '2023', grad: 'linear-gradient(130deg,#141e12 0%,#223418 100%)' },
-        { title: 'Golden Hour', sub: '2023', grad: 'linear-gradient(160deg,#1a1e10 0%,#2e3218 100%)' },
-      ]
-    },
-    sports: {
-      label: 'Action',
-      title: 'Sports',
-      num: '02.3',
-      projects: [
-        { title: 'Brophy Football', sub: '2024', grad: 'linear-gradient(150deg,#12141a 0%,#1e2535 100%)' },
-        { title: 'Arcadia Baseball', sub: '2024', grad: 'linear-gradient(140deg,#10121c 0%,#1a2030 100%)' },
-        { title: 'Track & Field', sub: '2023', grad: 'linear-gradient(130deg,#141420 0%,#20203a 100%)' },
-        { title: 'Basketball', sub: '2023', grad: 'linear-gradient(160deg,#101420 0%,#181e35 100%)' },
-      ]
-    },
-    events: {
-      label: 'Coverage',
-      title: 'Events',
-      num: '02.4',
-      projects: [
-        { title: 'Little League Opening', sub: '2024', grad: 'linear-gradient(150deg,#1a1820 0%,#2e2535 100%)' },
-        { title: 'Arcadia HS Grad', sub: '2024', grad: 'linear-gradient(140deg,#181620 0%,#28223a 100%)' },
-        { title: 'Community Fest', sub: '2023', grad: 'linear-gradient(130deg,#1c1820 0%,#302840 100%)' },
-        { title: 'Awards Night', sub: '2023', grad: 'linear-gradient(160deg,#16141e 0%,#281e30 100%)' },
-      ]
-    }
+  /* ════════════════════════════════════════════════
+     SITE ENGINE — powered by js/photos.js
+     Never edit this block for photos. Only edit photos.js.
+  ════════════════════════════════════════════════ */
+
+  const CAT_META = {
+    portraiture: { label: 'Portrait',  title: 'Portraiture', num: '02.1' },
+    nature:      { label: 'Landscape', title: 'Nature',      num: '02.2' },
+    sports:      { label: 'Action',    title: 'Sports',      num: '02.3' },
+    events:      { label: 'Coverage',  title: 'Events',      num: '02.4' },
   };
 
-  /* ─── Page navigation ─── */
+  function imgPath(cat, projKey, filename) {
+    return `images/${cat}/${projKey}/${filename}`;
+  }
+
+  /* Boot: wire hero + favorites from photos.js */
+  document.addEventListener('DOMContentLoaded', () => {
+    // Hero background
+    if (PHOTOS.hero && PHOTOS.hero[0]) {
+      const heroBg = document.querySelector('.hero-bg-fallback');
+      heroBg.style.backgroundImage = `url('images/hero/${PHOTOS.hero[0].src}')`;
+      heroBg.style.backgroundSize = 'cover';
+      heroBg.style.backgroundPosition = 'center';
+    }
+
+    // My Favorites
+    const featItems = document.querySelectorAll('.feat-item');
+    PHOTOS.favorites.forEach((photo, i) => {
+      if (!featItems[i]) return;
+      featItems[i].querySelector('.feat-img').style.backgroundImage = `url('images/favorites/${photo.src}')`;
+      const txt = featItems[i].querySelector('.feat-overlay-text');
+      if (txt && photo.title) txt.textContent = photo.title;
+    });
+  });
+
+  /* Page navigation */
   let currentCategory = null;
 
-  function showMain(scrollTarget) {
+  function showMain() {
     document.getElementById('main-page').classList.add('active');
     document.getElementById('category-page').classList.remove('active');
     document.getElementById('gallery-page').classList.remove('active');
     window.scrollTo(0, 0);
-    // ensure nav is visible on light bg
     updateNavColor();
   }
 
   function showCategory(catKey) {
     currentCategory = catKey;
-    const cat = CATEGORIES[catKey];
+    const meta = CAT_META[catKey];
+    const projects = PHOTOS[catKey];
+
     document.getElementById('main-page').classList.remove('active');
     document.getElementById('gallery-page').classList.remove('active');
     document.getElementById('category-page').classList.add('active');
-
-    document.getElementById('cat-num').textContent = cat.num;
-    document.getElementById('cat-title').textContent = cat.title;
+    document.getElementById('cat-num').textContent = meta.num;
+    document.getElementById('cat-title').textContent = meta.title;
 
     const grid = document.getElementById('cat-grid');
     grid.innerHTML = '';
-    cat.projects.forEach((proj, i) => {
+    Object.entries(projects).forEach(([projKey, proj]) => {
       const card = document.createElement('div');
       card.className = 'cat-proj-card';
       card.innerHTML = `
-        <div class="cat-proj-img" style="background:${proj.grad}"></div>
+        <div class="cat-proj-img" style="background-image:url('${imgPath(catKey, projKey, proj.cover)}');background-size:cover;background-position:center"></div>
         <div class="cat-proj-overlay">
-          <div class="cat-proj-sub">${cat.label} · ${proj.sub}</div>
+          <div class="cat-proj-sub">${meta.label} · ${proj.year}</div>
           <div class="cat-proj-title">${proj.title}</div>
         </div>`;
-      card.onclick = () => showGallery(catKey, i);
+      card.onclick = () => showGallery(catKey, projKey);
       grid.appendChild(card);
     });
-
     window.scrollTo(0, 0);
   }
 
-  function showGallery(catKey, projIndex) {
-    const cat = CATEGORIES[catKey];
-    const proj = cat.projects[projIndex];
+  function showGallery(catKey, projKey) {
+    const meta = CAT_META[catKey];
+    const proj = PHOTOS[catKey][projKey];
 
     document.getElementById('main-page').classList.remove('active');
     document.getElementById('category-page').classList.remove('active');
     document.getElementById('gallery-page').classList.add('active');
-
-    document.getElementById('gallery-category-label').textContent = cat.label + ' / ' + cat.title;
+    document.getElementById('gallery-category-label').textContent = `${meta.label} / ${meta.title}`;
     document.getElementById('gallery-title').textContent = proj.title;
-
-    // Back button goes to category page
     document.getElementById('gallery-back-btn').onclick = () => showCategory(catKey);
 
-    // Populate gallery with placeholder photo slots
     const gGrid = document.getElementById('gallery-grid');
     gGrid.innerHTML = '';
-    const grads = ['gph-1','gph-2','gph-3','gph-4','gph-5','gph-6','gph-1','gph-3','gph-5'];
-    grads.forEach(cls => {
+    proj.photos.forEach(photo => {
       const wrap = document.createElement('div');
       wrap.className = 'gallery-photo';
-      wrap.innerHTML = `<div class="g-img ${cls}"></div>`;
+      wrap.innerHTML = `<div class="g-img" style="background-image:url('${imgPath(catKey, projKey, photo.src)}');background-size:cover;background-position:center"></div>`;
       gGrid.appendChild(wrap);
     });
-
     window.scrollTo(0, 0);
   }
 
@@ -959,37 +945,29 @@
     }, 50);
   }
 
-  /* ─── Nav scroll behavior ─── */
+  /* Nav scroll */
   const nav = document.getElementById('mainNav');
   window.addEventListener('scroll', updateNavColor);
   function updateNavColor() {
     nav.classList.toggle('scrolled', window.scrollY > 60);
   }
 
-  /* ─── Reveal on scroll ─── */
+  /* Scroll reveal */
   const revealEls = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
   }, { threshold: 0.1 });
   revealEls.forEach(el => observer.observe(el));
 
-  /* ─── Contact form → mailto ─── */
+  /* Contact form */
   function handleSubmit(e) {
     e.preventDefault();
     const f = e.target;
-    const firstName = f.firstName.value;
-    const lastName = f.lastName.value;
-    const email = f.email.value;
-    const projectType = f.projectType.value;
-    const message = f.message.value;
-
-    const subject = encodeURIComponent(`Portfolio Inquiry – ${projectType || 'General'}`);
+    const subject = encodeURIComponent(`Portfolio Inquiry – ${f.projectType.value || 'General'}`);
     const body = encodeURIComponent(
-      `Name: ${firstName} ${lastName}\nEmail: ${email}\nProject Type: ${projectType}\n\nMessage:\n${message}`
+      `Name: ${f.firstName.value} ${f.lastName.value}\nEmail: ${f.email.value}\nProject Type: ${f.projectType.value}\n\nMessage:\n${f.message.value}`
     );
-    const mailtoLink = `mailto:aidanarria@gmail.com?subject=${subject}&body=${body}`;
-    window.location.href = mailtoLink;
-
+    window.location.href = `mailto:aidanarria@gmail.com?subject=${subject}&body=${body}`;
     const btn = f.querySelector('.btn-submit');
     btn.textContent = '✓ Opening Mail App…';
     btn.style.background = '#6b8f5e';

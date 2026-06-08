@@ -31,19 +31,19 @@ const PHOTOS = {
   // One image shown full-screen behind your name on the homepage.
   // Replace with your best shot.
   hero: [
-    { src: "hero.svg", alt: "Hero background photo" },
+    { src: "30.jpeg", alt: "Hero background photo" },
   ],
 
   // ── MY FAVORITES ─────────────────────────────────────────
   // Shown in the "My Favorites" grid on the homepage (6 slots).
   // Add or remove entries freely — the grid fills in order.
   favorites: [
-    { src: "favorite-1.svg", alt: "Favorite photo 1", title: "Golden Hour, 2024" },
-    { src: "favorite-2.svg", alt: "Favorite photo 2", title: "On the Field" },
-    { src: "favorite-3.svg", alt: "Favorite photo 3", title: "Portrait Study" },
-    { src: "favorite-4.svg", alt: "Favorite photo 4", title: "Summit Ridge" },
-    { src: "favorite-5.svg", alt: "Favorite photo 5", title: "The Match" },
-    { src: "favorite-6.svg", alt: "Favorite photo 6", title: "Still Light" },
+    { src: "29.jpeg", alt: "Favorite photo 1", title: "Golden Hour, 2024" },
+    { src: "1.jpeg", alt: "Favorite photo 2", title: "On the Field" },
+    { src: "34.jpeg", alt: "Favorite photo 3", title: "Portrait Study" },
+    { src: "35.jpeg", alt: "Favorite photo 4", title: "Summit Ridge" },
+    { src: "36.jpeg", alt: "Favorite photo 5", title: "The Match" },
+    { src: "33.jpeg", alt: "Favorite photo 6", title: "Still Light" },
   ],
 
   // ── PORTRAITURE PROJECTS ─────────────────────────────────
