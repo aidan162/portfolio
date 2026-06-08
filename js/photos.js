@@ -38,7 +38,7 @@ const PHOTOS = {
   // Shown in the "My Favorites" grid on the homepage (6 slots).
   // Add or remove entries freely — the grid fills in order.
   favorites: [
-    { src: "favorite-1.svg", alt: "Favorite photo 1", title: "Golden Hour, 2024" },
+    { src: "30.jpeg", alt: "Favorite photo 1", title: "Golden Hour, 2024" },
     { src: "favorite-2.svg", alt: "Favorite photo 2", title: "On the Field" },
     { src: "favorite-3.svg", alt: "Favorite photo 3", title: "Portrait Study" },
     { src: "favorite-4.svg", alt: "Favorite photo 4", title: "Summit Ridge" },
