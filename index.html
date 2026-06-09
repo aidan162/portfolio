@@ -295,7 +295,7 @@
     display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start;
   }
 
-  .about-img-wrap { position: relative; max-width: 340px; }
+  .about-img-wrap { position: relative; max-width: 460px; width: 100%; }
   .about-img-frame {
     aspect-ratio: 3/4;
     background-image: url("images/about.jpg");
@@ -528,22 +528,30 @@
     font-size: 0.7rem; letter-spacing: 0.2em; color: var(--warm-mid);
   }
 
-  /* Masonry-style gallery grid */
+  /* Masonry gallery — natural photo sizes, stacked nicely */
   .gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0.6rem;
+    columns: 3;
+    column-gap: 0.6rem;
   }
   .gallery-photo {
+    break-inside: avoid;
     overflow: hidden; border-radius: 3px;
-    aspect-ratio: 4/5; /* 8x10 */
+    margin-bottom: 0.6rem;
+    display: block;
   }
   .gallery-photo .g-img {
-    width: 100%; height: 100%;
+    width: 100%;
+    height: auto;
+    min-height: 180px;
+    display: block;
     background-size: cover; background-position: center;
     transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
-  .gallery-photo:hover .g-img { transform: scale(1.04); }
+  /* Portrait photos taller, landscape shorter — set via data attribute */
+  .gallery-photo[data-orientation="portrait"] .g-img { aspect-ratio: 4/5; }
+  .gallery-photo[data-orientation="landscape"] .g-img { aspect-ratio: 3/2; }
+  .gallery-photo:not([data-orientation]) .g-img { aspect-ratio: 4/5; }
+  .gallery-photo:hover .g-img { transform: scale(1.03); }
 
   /* Placeholder gradients for gallery photos */
   .gph-1 { background: linear-gradient(150deg, #1a1410 0%, #352820 100%); }
@@ -566,11 +574,11 @@
     .cat-projects-grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
     .cat-page-inner { padding: 0 1.5rem; }
     .gallery-inner { padding: 0 1.5rem; }
-    .gallery-grid { grid-template-columns: 1fr 1fr; }
+    .gallery-grid { columns: 2; }
   }
   @media (max-width: 480px) {
     .cat-projects-grid { grid-template-columns: 1fr; }
-    .gallery-grid { grid-template-columns: 1fr; }
+    .gallery-grid { columns: 1; }
   }
 </style>
 </head>
@@ -737,7 +745,8 @@
       </div>
     </div>
     <div class="contact-form-wrap reveal">
-      <form class="contact-form" onsubmit="handleSubmit(event)">
+      <!-- FORMSPREE: replace YOUR_FORM_ID below with your ID from formspree.io -->
+      <form class="contact-form" id="contact-form" onsubmit="handleSubmit(event)">
         <div class="form-row">
           <div class="form-group">
             <label>First Name</label>
@@ -934,6 +943,8 @@
     proj.photos.forEach(photo => {
       const wrap = document.createElement('div');
       wrap.className = 'gallery-photo';
+      const orientation = photo.orientation || 'portrait';
+      wrap.setAttribute('data-orientation', orientation);
       wrap.innerHTML = `<div class="g-img" style="background-image:url('${imgPath(catKey, projKey, photo.src)}');background-size:cover;background-position:center"></div>`;
       gGrid.appendChild(wrap);
     });
@@ -961,23 +972,63 @@
   }, { threshold: 0.1 });
   revealEls.forEach(el => observer.observe(el));
 
-  /* Contact form */
-  function handleSubmit(e) {
+  /* Contact form — powered by Formspree */
+  async function handleSubmit(e) {
     e.preventDefault();
     const f = e.target;
-    const subject = encodeURIComponent(`Portfolio Inquiry – ${f.projectType.value || 'General'}`);
-    const body = encodeURIComponent(
-      `Name: ${f.firstName.value} ${f.lastName.value}\nEmail: ${f.email.value}\nProject Type: ${f.projectType.value}\n\nMessage:\n${f.message.value}`
-    );
-    window.location.href = `mailto:aidanarria@gmail.com?subject=${subject}&body=${body}`;
     const btn = f.querySelector('.btn-submit');
-    btn.textContent = '✓ Opening Mail App…';
-    btn.style.background = '#6b8f5e';
-    setTimeout(() => {
-      btn.innerHTML = 'Send Message <svg width="18" height="8" viewBox="0 0 18 8" fill="none"><path d="M0 4H16M12 1L16 4L12 7" stroke="currentColor" stroke-width="1.2"/></svg>';
-      btn.style.background = '';
-      f.reset();
-    }, 3000);
+
+    // ▼ Replace YOUR_FORM_ID with your ID from formspree.io (free signup)
+    const FORMSPREE_ID = 'YOUR_FORM_ID';
+
+    if (FORMSPREE_ID === 'YOUR_FORM_ID') {
+      // Fallback to mailto until Formspree is set up
+      const subject = encodeURIComponent(`Portfolio Inquiry – ${f.projectType.value || 'General'}`);
+      const body = encodeURIComponent(
+        `Name: ${f.firstName.value} ${f.lastName.value}\nEmail: ${f.email.value}\nProject Type: ${f.projectType.value}\n\nMessage:\n${f.message.value}`
+      );
+      window.location.href = `mailto:aidanarria@gmail.com?subject=${subject}&body=${body}`;
+      return;
+    }
+
+    btn.textContent = 'Sending…';
+    btn.disabled = true;
+
+    try {
+      const data = new FormData();
+      data.append('firstName', f.firstName.value);
+      data.append('lastName', f.lastName.value);
+      data.append('email', f.email.value);
+      data.append('projectType', f.projectType.value);
+      data.append('message', f.message.value);
+
+      const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (res.ok) {
+        btn.textContent = '✓ Message Sent!';
+        btn.style.background = '#6b8f5e';
+        f.reset();
+        setTimeout(() => {
+          btn.innerHTML = 'Send Message <svg width="18" height="8" viewBox="0 0 18 8" fill="none"><path d="M0 4H16M12 1L16 4L12 7" stroke="currentColor" stroke-width="1.2"/></svg>';
+          btn.style.background = '';
+          btn.disabled = false;
+        }, 4000);
+      } else {
+        throw new Error('Send failed');
+      }
+    } catch (err) {
+      btn.textContent = 'Something went wrong — try again';
+      btn.style.background = '#8f3a3a';
+      btn.disabled = false;
+      setTimeout(() => {
+        btn.innerHTML = 'Send Message <svg width="18" height="8" viewBox="0 0 18 8" fill="none"><path d="M0 4H16M12 1L16 4L12 7" stroke="currentColor" stroke-width="1.2"/></svg>';
+        btn.style.background = '';
+      }, 3000);
+    }
   }
 </script>
 </body>
