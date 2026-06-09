@@ -38,12 +38,12 @@ const PHOTOS = {
   // Shown in the "My Favorites" grid on the homepage (6 slots).
   // Add or remove entries freely — the grid fills in order.
   favorites: [
-    { src: "29.jpg", alt: "Favorite photo 1", title: "Golden Hour, 2024" },
-    { src: "1.jpg", alt: "Favorite photo 2", title: "On the Field" },
-    { src: "34.jpeg", alt: "Favorite photo 3", title: "Portrait Study" },
-    { src: "35.jpg", alt: "Favorite photo 4", title: "Summit Ridge" },
-    { src: "36.jpg", alt: "Favorite photo 5", title: "The Match" },
-    { src: "33.jpeg", alt: "Favorite photo 6", title: "Still Light" },
+    { src: "29.jpg", alt: "Favorite photo 1", title: "Brophy Track, 2026" },
+    { src: "1.jpg", alt: "Favorite photo 2", title: "Brophy XC, 2026" },
+    { src: "34.jpeg", alt: "Favorite photo 3", title: "Brophy Tennis, 2025" },
+    { src: "35.jpg", alt: "Favorite photo 4", title: "Brophy Lacrosse, 2026" },
+    { src: "36.jpg", alt: "Favorite photo 5", title: "Brophy Lacrosse, 2026" },
+    { src: "33.jpeg", alt: "Favorite photo 6", title: "Brophy Soccer, 2026" },
   ],
 
   // ── PORTRAITURE PROJECTS ─────────────────────────────────
