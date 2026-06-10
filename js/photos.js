@@ -38,12 +38,12 @@ const PHOTOS = {
   // Shown in the "My Favorites" grid on the homepage (6 slots).
   // Add or remove entries freely — the grid fills in order.
   favorites: [
-    { src: "29.jpg", alt: "Favorite photo 1", title: "Golden Hour, 2024" },
-    { src: "1.jpg", alt: "Favorite photo 2", title: "On the Field" },
-    { src: "34.jpeg", alt: "Favorite photo 3", title: "Portrait Study" },
-    { src: "35.jpg", alt: "Favorite photo 4", title: "Summit Ridge" },
-    { src: "36.jpg", alt: "Favorite photo 5", title: "The Match" },
-    { src: "33.jpeg", alt: "Favorite photo 6", title: "Still Light" },
+    { src: "29.jpg", alt: "Favorite photo 1", title: "Brophy Track, 2026" },
+    { src: "1.jpg", alt: "Favorite photo 2", title: "Brophy XC, 2026" },
+    { src: "34.jpeg", alt: "Favorite photo 3", title: "Brophy Tennis, 2025" },
+    { src: "35.jpg", alt: "Favorite photo 4", title: "Brophy Lacrosse, 2026" },
+    { src: "36.jpg", alt: "Favorite photo 5", title: "Brophy Lacrosse, 2026" },
+    { src: "33.jpeg", alt: "Favorite photo 6", title: "Brophy Soccer, 2026" },
   ],
 
   // ── PORTRAITURE PROJECTS ─────────────────────────────────
@@ -212,16 +212,21 @@ const PHOTOS = {
     },
 
     "track-field": {
-      title: "Track & Field",
-      year: "2023",
-      cover: "track-1.svg",
+      title: "Brophy Track & Feild",
+      year: "2026",
+      cover: "1.jpg",
       photos: [
-        { src: "track-1.svg", alt: "Track and field 1" },
-        { src: "track-2.svg", alt: "Track and field 2" },
-        { src: "track-3.svg", alt: "Track and field 3" },
-        { src: "track-4.svg", alt: "Track and field 4" },
-        { src: "track-5.svg", alt: "Track and field 5" },
-        { src: "track-6.svg", alt: "Track and field 6" },
+        { src: "2.jpg", alt: "Track and field 1", orientation:"portrait"   },
+        { src: "3.jpg", alt: "Track and field 2", orientation:"portrait"   },
+        { src: "4.jpg", alt: "Track and field 3", orientation:"portrait"   },
+        { src: "5.jpg", alt: "Track and field 4", orientation:"portrait"   },
+        { src: "6.jpg", alt: "Track and field 5", orientation:"portrait"   },
+        { src: "7.jpg", alt: "Track and field 6", orientation:"portrait"   },
+        { src: "8.jpg", alt: "Track and field 2", orientation:"portrait"   },
+        { src: "9.jpg", alt: "Track and field 3", orientation:"portrait"   },
+        { src: "10.jpg", alt: "Track and field 4", orientation:"portrait"   },
+        { src: "11.jpg", alt: "Track and field 5", orientation:"portrait"   },
+        { src: "12.jpg", alt: "Track and field 6", orientation:"portrait"   },
       ],
     },
 
