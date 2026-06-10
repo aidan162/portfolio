@@ -177,17 +177,25 @@ const PHOTOS = {
 
   sports: {
 
-    "brophy-football": {
-      title: "Brophy Football",
-      year: "2024",
-      cover: "football-1.svg",
+    "brophy-tennis": {
+      title: "Brophy Tennis",
+      year: "2026",
+      cover: "1.jpeg",
       photos: [
-        { src: "football-1.svg", alt: "Brophy football 1", orientation:"portrait" },
-        { src: "football-2.svg", alt: "Brophy football 2", orientation:"portrait" },
-        { src: "football-3.svg", alt: "Brophy football 3", orientation:"portrait" },
-        { src: "football-4.svg", alt: "Brophy football 4", orientation:"portrait" },
-        { src: "football-5.svg", alt: "Brophy football 5", orientation:"portrait" },
-        { src: "football-6.svg", alt: "Brophy football 6", orientation:"portrait" },
+        { src: "1.jpg", alt: "Arcadia baseball 1", orientation:"portrait"  },
+        { src: "2.jpg", alt: "Arcadia baseball 2", orientation:"portrait"  },
+        { src: "3.jpg", alt: "Arcadia baseball 3", orientation:"portrait"  },
+        { src: "4.jpg", alt: "Arcadia baseball 4", orientation:"portrait"  },
+        { src: "5.jpg", alt: "Arcadia baseball 5", orientation:"portrait"  },
+        { src: "6.jpg", alt: "Arcadia baseball 6", orientation:"portrait"  },
+        { src: "7.jpg", alt: "Arcadia baseball 1", orientation:"portrait"  },
+        { src: "8.jpg", alt: "Arcadia baseball 2", orientation:"portrait"  },
+        { src: "9.jpg", alt: "Arcadia baseball 3", orientation:"portrait"  },
+        { src: "10.jpg", alt: "Arcadia baseball 4", orientation:"landscape"  },
+        { src: "11.jpg", alt: "Arcadia baseball 5", orientation:"landscape"  },
+        { src: "12.jpg", alt: "Arcadia baseball 6", orientation:"landscape"  },
+        { src: "13.jpg", alt: "Arcadia baseball 6", orientation:"landscape"  },
+        { src: "1.jpeg", alt: "Arcadia baseball 6", orientation:"landscape"  },
       ],
     },
 
