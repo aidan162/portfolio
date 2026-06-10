@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aidan Arria</title>
+<!-- FAVICON: upload your logo as favicon.png into your images/ folder -->
+<link rel="icon" type="image/png" href="images/favicon.png">
+<link rel="apple-touch-icon" href="images/favicon.png">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #f5f2ed;
+    --ink: #1a1714;
+    --warm-mid: #8c7b6b;
+    --accent: #c9a96e;
+    --light-rule: #e0d9d0;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* ── PAGE SYSTEM ── */
+  .page { display: none; }
+  .page.active { display: block; }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.4rem 3rem;
+    background: transparent;
+    transition: background 0.4s, border-color 0.4s;
+    border-bottom: 1px solid transparent;
+  }
+  nav.scrolled {
+    background: rgba(245,242,237,0.92);
+    backdrop-filter: blur(10px);
+    border-bottom-color: var(--light-rule);
+  }
+  nav.scrolled .nav-logo { color: var(--ink); }
+  nav.scrolled .nav-links a { color: var(--ink); }
+  nav.scrolled .nav-social svg { stroke: var(--ink); }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    text-transform: uppercase;
+    font-size: 1.1rem;
+    letter-spacing: 0.1em;
+    font-weight: 700;
+    color: white;
+    transition: color 0.4s;
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  .nav-right {
+    display: flex; align-items: center; gap: 2.5rem;
+  }
+
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    text-decoration: none; color: rgba(255,255,255,0.85);
+    font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 400;
+    position: relative; transition: color 0.4s; cursor: pointer;
+  }
+  .nav-links a::after {
+    content: ''; position: absolute; bottom: -3px; left: 0; right: 0;
+    height: 1px; background: var(--accent);
+    transform: scaleX(0); transition: transform 0.3s ease;
+  }
+  .nav-links a:hover::after { transform: scaleX(1); }
+
+  .nav-socials {
+    display: flex; align-items: center; gap: 1rem;
+  }
+  .nav-social {
+    display: flex; align-items: center; justify-content: center;
+    color: rgba(255,255,255,0.8);
+    transition: color 0.3s;
+    text-decoration: none;
+  }
+  .nav-social svg { stroke: rgba(255,255,255,0.8); transition: stroke 0.4s; }
+  .nav-social:hover svg { stroke: var(--accent); }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    height: 100vh; min-height: 600px;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden; background: #111;
+  }
+
+  .hero-bg {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover; opacity: 0.75;
+  }
+
+  .hero-bg-fallback {
+    position: absolute; inset: 0;
+    background: linear-gradient(160deg, #1a1210 0%, #2c2018 40%, #1a1e28 100%);
+  }
+
+  .hero-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(10,8,6,0.25) 0%,
+      rgba(10,8,6,0.45) 60%,
+      rgba(10,8,6,0.7) 100%
+    );
+  }
+
+  .hero-content {
+    position: relative; z-index: 2;
+    text-align: center; color: white; padding: 0 2rem;
+  }
+
+  .hero-name {
+    font-family: 'Playfair Display', serif;
+    text-transform: uppercase;
+    font-size: clamp(3.5rem, 8vw, 8rem);
+    font-weight: 900; line-height: 1;
+    letter-spacing: -0.01em; margin-bottom: 1.2rem;
+    opacity: 0; transform: translateY(25px);
+    animation: fadeUp 1s ease 0.3s forwards;
+  }
+
+  .hero-title {
+    font-size: clamp(0.75rem, 1.5vw, 0.9rem);
+    letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--accent); font-weight: 400; margin-bottom: 2.5rem;
+    opacity: 0; transform: translateY(15px);
+    animation: fadeUp 1s ease 0.6s forwards;
+  }
+
+  .hero-cta {
+    display: inline-flex; align-items: center; gap: 1rem;
+    text-decoration: none; color: white;
+    font-size: 0.78rem; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 400;
+    border-bottom: 1px solid rgba(255,255,255,0.4); padding-bottom: 0.35rem;
+    opacity: 0; animation: fadeUp 1s ease 0.9s forwards;
+    transition: color 0.2s, border-color 0.2s; cursor: pointer;
+  }
+  .hero-cta:hover { color: var(--accent); border-color: var(--accent); }
+  .hero-cta svg { transition: transform 0.3s; }
+  .hero-cta:hover svg { transform: translateX(5px); }
+
+  .hero-scroll {
+    position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+    color: rgba(255,255,255,0.4);
+    font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase;
+    z-index: 2; opacity: 0;
+    animation: fadeUp 1s ease 1.2s forwards;
+  }
+  .scroll-line {
+    width: 1px; height: 3rem;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.4), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+
+  @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+  @keyframes scrollPulse { 0%, 100% { opacity: 0.4; } 50% { opacity: 0.9; } }
+
+  /* ── SECTION HEADERS ── */
+  .section-header {
+    display: flex; align-items: baseline; justify-content: space-between;
+    border-top: 1px solid var(--ink);
+    padding-top: 0.8rem; margin-bottom: 3rem;
+  }
+  .section-num {
+    font-size: 0.7rem; letter-spacing: 0.2em;
+    color: var(--warm-mid); font-weight: 400;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    text-transform: uppercase;
+    font-size: clamp(1.8rem, 3vw, 2.8rem);
+    font-weight: 900;
+  }
+  .section-link {
+    font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--warm-mid); text-decoration: none; transition: color 0.2s; cursor: pointer;
+  }
+  .section-link:hover { color: var(--ink); }
+
+  /* ── FEATURED GRID (My Favorites) ── */
+  #work { padding: 6rem 3rem; border-top: 1px solid var(--light-rule); }
+
+  .featured-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+  }
+
+  .feat-item {
+    overflow: hidden; border-radius: 3px; cursor: pointer; position: relative;
+    aspect-ratio: 4 / 5; /* true 8x10 ratio */
+  }
+  .feat-item .feat-img {
+    width: 100%; height: 100%;
+    background-size: cover; background-position: center;
+    transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  .feat-item:hover .feat-img { transform: scale(1.05); }
+  .feat-item .feat-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(20,15,10,0.7) 0%, transparent 50%);
+    opacity: 0; transition: opacity 0.4s;
+    display: flex; align-items: flex-end; padding: 1.5rem;
+  }
+  .feat-item:hover .feat-overlay { opacity: 1; }
+  .feat-overlay-text {
+    color: white;
+    font-family: 'DM Sans', sans-serif;
+    font-style: italic; font-size: 1rem;
+  }
+
+  .feat-ph-1 { background: linear-gradient(150deg, #2c2520 0%, #4a3728 100%); }
+  .feat-ph-2 { background: linear-gradient(120deg, #1e2820 0%, #354530 100%); }
+  .feat-ph-3 { background: linear-gradient(130deg, #1a1e2a 0%, #2c3545 100%); }
+  .feat-ph-4 { background: linear-gradient(160deg, #281e1a 0%, #3d2e22 100%); }
+  .feat-ph-5 { background: linear-gradient(140deg, #1c2418 0%, #2e3d28 100%); }
+  .feat-ph-6 { background: linear-gradient(130deg, #1e1c28 0%, #302d42 100%); }
+
+  /* ── PROJECTS (main page) ── */
+  #projects { padding: 6rem 3rem; background: var(--ink); color: var(--cream); }
+  #projects .section-header { border-top-color: rgba(245,242,237,0.2); }
+  #projects .section-num { color: var(--accent); }
+  #projects .section-link { color: rgba(245,242,237,0.4); }
+  #projects .section-link:hover { color: var(--cream); }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+  }
+
+  /* 8x10 ratio for project cards */
+  .project-card {
+    position: relative; overflow: hidden; cursor: pointer;
+    aspect-ratio: 4/5; /* 8x10 = 4:5 ratio */
+  }
+  .project-card .proj-img {
+    width: 100%; height: 100%;
+    background-size: cover; background-position: center;
+    transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  .project-card:hover .proj-img { transform: scale(1.08); }
+
+  .proj-info {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(20,15,10,0.9) 0%, rgba(20,15,10,0.2) 50%, transparent 100%);
+    display: flex; flex-direction: column; justify-content: flex-end; padding: 2rem;
+  }
+
+  .proj-category {
+    font-size: 0.65rem; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 0.5rem; font-weight: 400;
+  }
+  .proj-name {
+    font-family: 'Playfair Display', serif;
+    text-transform: uppercase;
+    font-size: 1.5rem; font-weight: 700; line-height: 1.1; color: white;
+    transform: translateY(5px); transition: transform 0.4s;
+  }
+  .project-card:hover .proj-name { transform: translateY(0); }
+  .proj-count {
+    font-size: 0.75rem; color: rgba(245,242,237,0.5);
+    margin-top: 0.4rem; letter-spacing: 0.05em;
+    opacity: 0; transform: translateY(8px);
+    transition: opacity 0.4s 0.05s, transform 0.4s 0.05s;
+  }
+  .project-card:hover .proj-count { opacity: 1; transform: translateY(0); }
+
+  .proj-ph-1 { background: linear-gradient(150deg, #1a1410 0%, #352820 100%); }
+  .proj-ph-2 { background: linear-gradient(120deg, #141c14 0%, #253820 100%); }
+  .proj-ph-3 { background: linear-gradient(130deg, #12141a 0%, #1e2535 100%); }
+  .proj-ph-4 { background: linear-gradient(140deg, #1a1820 0%, #2e2535 100%); }
+
+  /* ── ABOUT ── */
+  #about {
+    padding: 7rem 3rem;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start;
+  }
+
+  .about-img-wrap { position: relative; max-width: 460px; width: 100%; }
+  .about-img-frame {
+    aspect-ratio: 3/4;
+    background-image: url("images/about.jpg");
+    background-size: cover;
+    background-position: center top;
+    border-radius: 3px; overflow: hidden;
+  }
+  .about-img-frame::after {
+    content: "";
+    position: absolute;
+    top: 1.5rem; left: 1.5rem; right: -1.5rem; bottom: -1.5rem;
+    border: 1px solid var(--accent); border-radius: 3px; z-index: -1;
+  }
+
+  .about-text .section-header { margin-bottom: 2rem; }
+  .rule-accent { height: 3px; width: 3rem; background: var(--accent); margin-bottom: 2rem; }
+  .about-body {
+    font-size: 0.95rem; line-height: 1.9; color: var(--warm-mid); margin-bottom: 1.2rem;
+  }
+
+  /* ── CONTACT ── */
+  #contact {
+    background: var(--ink); color: var(--cream);
+    padding: 7rem 3rem;
+    display: grid; grid-template-columns: 1fr 1.2fr; gap: 6rem;
+  }
+
+  .contact-left .section-header { border-top-color: rgba(245,242,237,0.15); }
+  .contact-left .section-num { color: var(--accent); }
+
+  .contact-headline {
+    font-family: 'Playfair Display', serif;
+    text-transform: uppercase;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 900; line-height: 1.1; margin-bottom: 2rem;
+  }
+  .contact-headline em { font-style: italic; color: var(--accent); }
+
+  .contact-detail {
+    display: flex; align-items: center; gap: 1rem;
+    margin-bottom: 1rem; font-size: 0.9rem; color: rgba(245,242,237,0.6);
+  }
+  .contact-detail span:first-child {
+    font-size: 0.65rem; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--accent); width: 5rem; flex-shrink: 0;
+  }
+
+  .contact-form { display: flex; flex-direction: column; gap: 1.2rem; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+  .form-group label {
+    font-size: 0.65rem; letter-spacing: 0.18em;
+    text-transform: uppercase; color: rgba(245,242,237,0.4);
+  }
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    background: rgba(245,242,237,0.05);
+    border: 1px solid rgba(245,242,237,0.12);
+    border-radius: 2px; padding: 0.85rem 1rem;
+    color: var(--cream); font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem; font-weight: 300; outline: none;
+    transition: border-color 0.3s, background 0.3s;
+  }
+  .form-group input:focus,
+  .form-group textarea:focus,
+  .form-group select:focus {
+    border-color: var(--accent); background: rgba(245,242,237,0.08);
+  }
+  .form-group textarea { resize: vertical; min-height: 120px; }
+  .form-group select option { background: var(--ink); }
+
+  .btn-submit {
+    display: inline-flex; align-items: center; gap: 1rem;
+    background: var(--accent); color: var(--ink);
+    border: none; padding: 1rem 2.5rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.78rem; letter-spacing: 0.18em;
+    text-transform: uppercase; font-weight: 500;
+    cursor: pointer; border-radius: 2px; width: fit-content;
+    transition: background 0.3s, transform 0.2s;
+  }
+  .btn-submit:hover { background: #d4b880; transform: translateY(-1px); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #111; color: rgba(245,242,237,0.3);
+    padding: 2.5rem 3rem;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 0.72rem; letter-spacing: 0.1em;
+  }
+  footer .footer-logo {
+    font-family: 'Playfair Display', serif;
+    text-transform: uppercase;
+    font-size: 1rem; font-weight: 700;
+    color: rgba(245,242,237,0.6); letter-spacing: 0.08em;
+  }
+  .footer-socials { display: flex; gap: 1.5rem; align-items: center; }
+  .footer-socials a {
+    color: rgba(245,242,237,0.3); text-decoration: none;
+    letter-spacing: 0.14em; text-transform: uppercase; font-size: 0.68rem;
+    transition: color 0.2s;
+  }
+  .footer-socials a:hover { color: var(--accent); }
+
+  /* ── SCROLL REVEAL ── */
+  .reveal {
+    opacity: 0; transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ─────────────────────────────────────────
+     CATEGORY LANDING PAGE (e.g. Portraiture Projects)
+  ───────────────────────────────────────── */
+  #category-page {
+    min-height: 100vh;
+    background: var(--ink);
+    padding-top: 7rem;
+    padding-bottom: 5rem;
+    color: var(--cream);
+    display: none;
+  }
+  #category-page.active { display: block; }
+
+  .cat-page-inner { padding: 0 3rem; }
+
+  .cat-back {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--accent); text-decoration: none; cursor: pointer;
+    margin-bottom: 3rem; transition: color 0.2s;
+  }
+  .cat-back:hover { color: var(--cream); }
+
+  .cat-page-header {
+    border-top: 1px solid rgba(245,242,237,0.2);
+    padding-top: 0.8rem; margin-bottom: 3rem;
+    display: flex; align-items: baseline; gap: 2rem;
+  }
+  .cat-page-num { font-size: 0.7rem; letter-spacing: 0.2em; color: var(--accent); }
+  .cat-page-title {
+    font-family: 'Playfair Display', serif;
+    text-transform: uppercase;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 900;
+  }
+
+  /* Grid of individual projects on the category page */
+  .cat-projects-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+  }
+
+  .cat-proj-card {
+    position: relative; overflow: hidden;
+    border-radius: 3px; cursor: pointer;
+    aspect-ratio: 4/5; /* 8x10 */
+  }
+  .cat-proj-img {
+    width: 100%; height: 100%;
+    background-size: cover; background-position: center;
+    transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  .cat-proj-card:hover .cat-proj-img { transform: scale(1.08); }
+
+  .cat-proj-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(10,8,6,0.85) 0%, rgba(10,8,6,0.1) 55%, transparent 100%);
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 1.5rem;
+    transition: background 0.4s;
+  }
+  .cat-proj-card:hover .cat-proj-overlay {
+    background: linear-gradient(to top, rgba(10,8,6,0.92) 0%, rgba(10,8,6,0.3) 60%, transparent 100%);
+  }
+
+  .cat-proj-title {
+    font-family: 'Playfair Display', serif;
+    text-transform: uppercase;
+    font-size: 1.1rem; font-weight: 700;
+    color: white; line-height: 1.2;
+    transform: translateY(4px); transition: transform 0.4s;
+  }
+  .cat-proj-card:hover .cat-proj-title { transform: translateY(0); }
+
+  .cat-proj-sub {
+    font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 0.4rem; font-weight: 400;
+    opacity: 0; transform: translateY(6px);
+    transition: opacity 0.4s, transform 0.4s;
+  }
+  .cat-proj-card:hover .cat-proj-sub { opacity: 1; transform: translateY(0); }
+
+  /* ─────────────────────────────────────────
+     PROJECT GALLERY PAGE
+  ───────────────────────────────────────── */
+  #gallery-page {
+    min-height: 100vh;
+    background: var(--cream);
+    padding-top: 7rem;
+    padding-bottom: 5rem;
+    display: none;
+  }
+  #gallery-page.active { display: block; }
+
+  .gallery-inner { padding: 0 3rem; }
+
+  .gallery-back {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--warm-mid); text-decoration: none; cursor: pointer;
+    margin-bottom: 3rem; transition: color 0.2s;
+  }
+  .gallery-back:hover { color: var(--ink); }
+
+  .gallery-page-header {
+    border-top: 1px solid var(--ink);
+    padding-top: 0.8rem; margin-bottom: 3rem;
+    display: flex; align-items: baseline; gap: 2rem;
+  }
+  .gallery-page-title {
+    font-family: 'Playfair Display', serif;
+    text-transform: uppercase;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 900;
+  }
+  .gallery-page-sub {
+    font-size: 0.7rem; letter-spacing: 0.2em; color: var(--warm-mid);
+  }
+
+  /* Masonry gallery — natural photo sizes, stacked nicely */
+  .gallery-grid {
+    columns: 3;
+    column-gap: 0.6rem;
+  }
+  /* Shimmer keyframe for loading placeholder */
+  @keyframes shimmer {
+    0%   { background-position: -800px 0; }
+    100% { background-position:  800px 0; }
+  }
+
+  .gallery-photo {
+    break-inside: avoid;
+    overflow: hidden; border-radius: 3px;
+    margin-bottom: 0.6rem;
+    display: block;
+  }
+  .gallery-photo .g-img {
+    width: 100%;
+    height: auto;
+    min-height: 180px;
+    display: block;
+    background-size: cover; background-position: center;
+    transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.5s ease;
+    opacity: 0;
+  }
+  .gallery-photo .g-img.loaded { opacity: 1; }
+  /* Shimmer shown while not yet loaded */
+  .gallery-photo .g-img:not(.loaded) {
+    background-image: linear-gradient(90deg, #2a2520 25%, #3a3028 50%, #2a2520 75%) !important;
+    background-size: 800px 100%;
+    animation: shimmer 1.5s infinite linear;
+  }
+  /* Portrait photos taller, landscape shorter — set via data attribute */
+  .gallery-photo[data-orientation="portrait"] .g-img { aspect-ratio: 4/5; }
+  .gallery-photo[data-orientation="landscape"] .g-img { aspect-ratio: 3/2; }
+  .gallery-photo:not([data-orientation]) .g-img { aspect-ratio: 4/5; }
+  .gallery-photo:hover .g-img { transform: scale(1.03); }
+
+  /* Lazy shimmer for favorites and project cards too */
+  .feat-img, .proj-img, .cat-proj-img {
+    transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.5s ease;
+  }
+  .feat-img.lazy-loaded, .proj-img.lazy-loaded, .cat-proj-img.lazy-loaded { opacity: 1; }
+
+  /* Placeholder gradients for gallery photos */
+  .gph-1 { background: linear-gradient(150deg, #1a1410 0%, #352820 100%); }
+  .gph-2 { background: linear-gradient(120deg, #141c14 0%, #253820 100%); }
+  .gph-3 { background: linear-gradient(130deg, #12141a 0%, #1e2535 100%); }
+  .gph-4 { background: linear-gradient(140deg, #1a1820 0%, #2e2535 100%); }
+  .gph-5 { background: linear-gradient(155deg, #1c1812 0%, #2e2818 100%); }
+  .gph-6 { background: linear-gradient(125deg, #181c1a 0%, #253028 100%); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 1.2rem 1.5rem; }
+    .nav-links { gap: 1.5rem; }
+    #work, #projects, #about, #contact { padding: 4rem 1.5rem; }
+    .projects-grid { grid-template-columns: 1fr 1fr; }
+    #about { grid-template-columns: 1fr; gap: 3rem; }
+    #contact { grid-template-columns: 1fr; gap: 3rem; }
+    .featured-grid { grid-template-columns: repeat(2, 1fr); }
+    .form-row { grid-template-columns: 1fr; }
+    .cat-projects-grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .cat-page-inner { padding: 0 1.5rem; }
+    .gallery-inner { padding: 0 1.5rem; }
+    .gallery-grid { columns: 2; }
+  }
+  @media (max-width: 480px) {
+    .cat-projects-grid { grid-template-columns: 1fr; }
+    .gallery-grid { columns: 1; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <a class="nav-logo" onclick="showMain()" href="#">Aidan Arria</a>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a onclick="showMain(); scrollToSection('work')">Work</a></li>
+      <li><a onclick="showMain(); scrollToSection('projects')">Projects</a></li>
+      <li><a onclick="showMain(); scrollToSection('about')">About</a></li>
+      <li><a onclick="showMain(); scrollToSection('contact')">Contact</a></li>
+    </ul>
+    <div class="nav-socials">
+      <!-- Instagram -->
+      <a class="nav-social" href="https://www.instagram.com/arria.visuals/" target="_blank" aria-label="Instagram">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+          <circle cx="12" cy="12" r="4"/>
+          <circle cx="17.5" cy="6.5" r="0.8" fill="currentColor" stroke="none"/>
+        </svg>
+      </a>
+      <!-- YouTube -->
+      <a class="nav-social" href="https://www.youtube.com/@arria.visuals" target="_blank" aria-label="YouTube">
+        <svg width="22" height="20" viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/>
+          <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="currentColor" stroke="none"/>
+        </svg>
+      </a>
+      <!-- TikTok -->
+      <a class="nav-social" href="https://www.tiktok.com/@arria.visuals" target="_blank" aria-label="TikTok">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════
+     MAIN PAGE
+══════════════════════════════════════ -->
+<div id="main-page" class="page active">
+
+  <!-- HERO -->
+  <section class="hero">
+    <!-- ▼ PHOTO: uncomment when ready: <img class="hero-bg" src="images/hero/hero.jpg" alt=""> -->
+    <div class="hero-bg-fallback"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1 class="hero-name">Aidan Arria</h1>
+      <p class="hero-title">Photographer &amp; Videographer</p>
+      <a class="hero-cta" onclick="scrollToSection('work')">
+        View the Work
+        <svg width="20" height="10" viewBox="0 0 20 10" fill="none">
+          <path d="M0 5H18M14 1L18 5L14 9" stroke="currentColor" stroke-width="1.2"/>
+        </svg>
+      </a>
+    </div>
+    <div class="hero-scroll">
+      <div class="scroll-line"></div>
+      Scroll
+    </div>
+  </section>
+
+  <!-- MY FAVORITES (was "Selected Work") -->
+  <section id="work">
+    <div class="section-header reveal">
+      <span class="section-num">01</span>
+      <h2 class="section-title">My Favorites</h2>
+      <a class="section-link" onclick="scrollToSection('projects')">All Projects →</a>
+    </div>
+    <div class="featured-grid">
+      <div class="feat-item reveal"><div class="feat-img feat-ph-1"></div><div class="feat-overlay"><span class="feat-overlay-text">Golden Hour, 2024</span></div></div>
+      <div class="feat-item reveal" style="transition-delay:.1s"><div class="feat-img feat-ph-2"></div><div class="feat-overlay"><span class="feat-overlay-text">On the Field</span></div></div>
+      <div class="feat-item reveal" style="transition-delay:.15s"><div class="feat-img feat-ph-3"></div><div class="feat-overlay"><span class="feat-overlay-text">Portrait Study</span></div></div>
+      <div class="feat-item reveal" style="transition-delay:.2s"><div class="feat-img feat-ph-4"></div><div class="feat-overlay"><span class="feat-overlay-text">Summit Ridge</span></div></div>
+      <div class="feat-item reveal" style="transition-delay:.25s"><div class="feat-img feat-ph-5"></div><div class="feat-overlay"><span class="feat-overlay-text">The Match</span></div></div>
+      <div class="feat-item reveal" style="transition-delay:.3s"><div class="feat-img feat-ph-6"></div><div class="feat-overlay"><span class="feat-overlay-text">Still Light</span></div></div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="section-header reveal">
+      <span class="section-num">02</span>
+      <h2 class="section-title">Projects</h2>
+    </div>
+    <div class="projects-grid">
+      <div class="project-card reveal" onclick="showCategory('portraiture')">
+        <div class="proj-img proj-ph-1"></div>
+        <div class="proj-info">
+          <div class="proj-category">Portrait</div>
+          <div class="proj-name">Portraiture</div>
+          <div class="proj-count">View collection</div>
+        </div>
+      </div>
+      <div class="project-card reveal" style="transition-delay:.1s" onclick="showCategory('nature')">
+        <div class="proj-img proj-ph-2"></div>
+        <div class="proj-info">
+          <div class="proj-category">Landscape</div>
+          <div class="proj-name">Nature</div>
+          <div class="proj-count">View collection</div>
+        </div>
+      </div>
+      <div class="project-card reveal" style="transition-delay:.2s" onclick="showCategory('sports')">
+        <div class="proj-img proj-ph-3"></div>
+        <div class="proj-info">
+          <div class="proj-category">Action</div>
+          <div class="proj-name">Sports</div>
+          <div class="proj-count">View collection</div>
+        </div>
+      </div>
+      <div class="project-card reveal" style="transition-delay:.3s" onclick="showCategory('events')">
+        <div class="proj-img proj-ph-4"></div>
+        <div class="proj-info">
+          <div class="proj-category">Coverage</div>
+          <div class="proj-name">Events</div>
+          <div class="proj-count">View collection</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="about-img-wrap reveal">
+      <div class="about-img-frame"></div>
+    </div>
+    <div class="about-text">
+      <div class="section-header reveal">
+        <span class="section-num">03</span>
+        <h2 class="section-title">About</h2>
+      </div>
+      <div class="rule-accent"></div>
+      <p class="about-body reveal">Hi, I'm Aidan Arria, a photographer and videographer based in Phoenix, Arizona. Over the past 2.5 years, I've focused on capturing sports, events, and the moments that often go unnoticed in the middle of the action.</p>
+      <p class="about-body reveal">My experience includes working with Brophy's The Stampede, covering a wide range of athletic events, as well as creating content for Arcadia Little League and Arcadia High School sports. Whether I'm on the sidelines of a championship game or covering a community event, I aim to tell stories through authentic, well-timed images and video.</p>
+      <p class="about-body reveal">Beyond shooting, I enjoy the entire creative process, from planning and filming to editing and delivering a final product that feels polished and purposeful.</p>
+      <p class="about-body reveal">I'm always looking for new opportunities and projects. If you're interested in photography, videography, event coverage, sports media, or creative content, I'd love to connect.</p>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="contact-left">
+      <div class="section-header reveal">
+        <span class="section-num">04</span>
+        <h2 class="section-title" style="color:var(--cream)">Contact</h2>
+      </div>
+      <h3 class="contact-headline reveal">Let's <em>work.</em></h3>
+      <div class="contact-detail reveal">
+        <span>Email</span>
+        <span>aidanarria@gmail.com</span>
+      </div>
+      <div class="contact-detail reveal">
+        <span>Based in</span>
+        <span>Phoenix, Arizona — willing to travel</span>
+      </div>
+      <div class="contact-detail reveal">
+        <span>Available</span>
+        <span>For commissions &amp; editorial</span>
+      </div>
+    </div>
+    <div class="contact-form-wrap reveal">
+      <!-- FORMSPREE: replace YOUR_FORM_ID below with your ID from formspree.io -->
+      <form class="contact-form" id="contact-form" onsubmit="handleSubmit(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label>First Name</label>
+            <input type="text" name="firstName" placeholder="Jane">
+          </div>
+          <div class="form-group">
+            <label>Last Name</label>
+            <input type="text" name="lastName" placeholder="Smith">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" name="email" placeholder="jane@example.com">
+        </div>
+        <div class="form-group">
+          <label>Type of Project</label>
+          <select name="projectType">
+            <option value="">Select one...</option>
+            <option>Portrait Session</option>
+            <option>Landscape / Travel</option>
+            <option>Sports / Event</option>
+            <option>Events Coverage</option>
+            <option>Commercial</option>
+            <option>Video</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Message</label>
+          <textarea name="message" placeholder="Tell me about your project, event, or idea..."></textarea>
+        </div>
+        <button type="submit" class="btn-submit">
+          Send Message
+          <svg width="18" height="8" viewBox="0 0 18 8" fill="none">
+            <path d="M0 4H16M12 1L16 4L12 7" stroke="currentColor" stroke-width="1.2"/>
+          </svg>
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">Aidan Arria</div>
+    <span>© 2025 All Rights Reserved</span>
+    <div class="footer-socials">
+      <a href="https://www.instagram.com/arria.visuals/" target="_blank">Instagram</a>
+      <a href="https://www.youtube.com/@arria.visuals" target="_blank">YouTube</a>
+      <a href="https://www.tiktok.com/@arria.visuals" target="_blank">TikTok</a>
+    </div>
+  </footer>
+
+</div><!-- /main-page -->
+
+
+<!-- ══════════════════════════════════════
+     CATEGORY LANDING PAGES
+══════════════════════════════════════ -->
+<div id="category-page">
+  <div class="cat-page-inner">
+    <a class="cat-back" onclick="showMain(); scrollToSection('projects')">
+      <svg width="16" height="8" viewBox="0 0 16 8" fill="none">
+        <path d="M16 4H2M6 1L2 4L6 7" stroke="currentColor" stroke-width="1.2"/>
+      </svg>
+      Back to Projects
+    </a>
+    <div class="cat-page-header">
+      <span class="cat-page-num" id="cat-num">02</span>
+      <h2 class="cat-page-title" id="cat-title">Portraiture</h2>
+    </div>
+    <div class="cat-projects-grid" id="cat-grid">
+      <!-- Populated by JS -->
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════
+     GALLERY PAGE
+══════════════════════════════════════ -->
+<div id="gallery-page">
+  <div class="gallery-inner">
+    <a class="gallery-back" id="gallery-back-btn" onclick="">
+      <svg width="16" height="8" viewBox="0 0 16 8" fill="none">
+        <path d="M16 4H2M6 1L2 4L6 7" stroke="currentColor" stroke-width="1.2"/>
+      </svg>
+      Back
+    </a>
+    <div class="gallery-page-header">
+      <div>
+        <div class="gallery-page-sub" id="gallery-category-label"></div>
+        <h2 class="gallery-page-title" id="gallery-title">Project Title</h2>
+      </div>
+    </div>
+    <div class="gallery-grid" id="gallery-grid">
+      <!-- Populated by JS -->
+    </div>
+  </div>
+</div>
+
+
+<!-- Photo manifest — edit js/photos.js to add/change photos -->
+<script src="js/photos.js"></script>
+
+<script>
+  /* ════════════════════════════════════════════════
+     SITE ENGINE — powered by js/photos.js
+     Never edit this block for photos. Only edit photos.js.
+  ════════════════════════════════════════════════ */
+
+  const CAT_META = {
+    portraiture: { label: 'Portrait',  title: 'Portraiture', num: '02.1' },
+    nature:      { label: 'Landscape', title: 'Nature',      num: '02.2' },
+    sports:      { label: 'Action',    title: 'Sports',      num: '02.3' },
+    events:      { label: 'Coverage',  title: 'Events',      num: '02.4' },
+  };
+
+  function imgPath(cat, projKey, filename) {
+    return `images/${cat}/${projKey}/${filename}`;
+  }
+
+  /* Boot: wire hero + favorites from photos.js */
+  document.addEventListener('DOMContentLoaded', () => {
+    // Hero background
+    if (PHOTOS.hero && PHOTOS.hero[0]) {
+      const heroBg = document.querySelector('.hero-bg-fallback');
+      heroBg.style.backgroundImage = `url('images/hero/${PHOTOS.hero[0].src}')`;
+      heroBg.style.backgroundSize = 'cover';
+      heroBg.style.backgroundPosition = 'center';
+    }
+
+    // My Favorites — lazy loaded
+    const featItems = document.querySelectorAll('.feat-item');
+    PHOTOS.favorites.forEach((photo, i) => {
+      if (!featItems[i]) return;
+      const img = featItems[i].querySelector('.feat-img');
+      img.setAttribute('data-src', `images/favorites/${photo.src}`);
+      const txt = featItems[i].querySelector('.feat-overlay-text');
+      if (txt && photo.title) txt.textContent = photo.title;
+    });
+    initLazyImages();
+  });
+
+  /* Page navigation */
+  let currentCategory = null;
+
+  function showMain() {
+    document.getElementById('main-page').classList.add('active');
+    document.getElementById('category-page').classList.remove('active');
+    document.getElementById('gallery-page').classList.remove('active');
+    window.scrollTo(0, 0);
+    updateNavColor();
+  }
+
+  function showCategory(catKey) {
+    currentCategory = catKey;
+    const meta = CAT_META[catKey];
+    const projects = PHOTOS[catKey];
+
+    document.getElementById('main-page').classList.remove('active');
+    document.getElementById('gallery-page').classList.remove('active');
+    document.getElementById('category-page').classList.add('active');
+    document.getElementById('cat-num').textContent = meta.num;
+    document.getElementById('cat-title').textContent = meta.title;
+
+    const grid = document.getElementById('cat-grid');
+    grid.innerHTML = '';
+    Object.entries(projects).forEach(([projKey, proj]) => {
+      const card = document.createElement('div');
+      card.className = 'cat-proj-card';
+      card.innerHTML = `
+        <div class="cat-proj-img" style="background-image:url('${imgPath(catKey, projKey, proj.cover)}');background-size:cover;background-position:center"></div>
+        <div class="cat-proj-overlay">
+          <div class="cat-proj-sub">${meta.label} · ${proj.year}</div>
+          <div class="cat-proj-title">${proj.title}</div>
+        </div>`;
+      card.onclick = () => showGallery(catKey, projKey);
+      grid.appendChild(card);
+    });
+    window.scrollTo(0, 0);
+  }
+
+  function showGallery(catKey, projKey) {
+    const meta = CAT_META[catKey];
+    const proj = PHOTOS[catKey][projKey];
+
+    document.getElementById('main-page').classList.remove('active');
+    document.getElementById('category-page').classList.remove('active');
+    document.getElementById('gallery-page').classList.add('active');
+    document.getElementById('gallery-category-label').textContent = `${meta.label} / ${meta.title}`;
+    document.getElementById('gallery-title').textContent = proj.title;
+    document.getElementById('gallery-back-btn').onclick = () => showCategory(catKey);
+
+    const gGrid = document.getElementById('gallery-grid');
+    gGrid.innerHTML = '';
+    proj.photos.forEach(photo => {
+      const wrap = document.createElement('div');
+      wrap.className = 'gallery-photo';
+      const orientation = photo.orientation || 'portrait';
+      wrap.setAttribute('data-orientation', orientation);
+      const src = imgPath(catKey, projKey, photo.src);
+      // Store src in data-src — only loads when scrolled into view
+      wrap.innerHTML = `<div class="g-img" data-src="${src}"></div>`;
+      gGrid.appendChild(wrap);
+    });
+    // Trigger lazy load for newly added images
+    initLazyImages();
+    window.scrollTo(0, 0);
+  }
+
+  function scrollToSection(id) {
+    setTimeout(() => {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }, 50);
+  }
+
+  /* Nav scroll */
+  const nav = document.getElementById('mainNav');
+  window.addEventListener('scroll', updateNavColor);
+  function updateNavColor() {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  }
+
+  /* Scroll reveal */
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  revealEls.forEach(el => observer.observe(el));
+
+  /* ── Lazy image loader ── */
+  let lazyObserver = null;
+
+  function initLazyImages() {
+    const lazyImgs = document.querySelectorAll('[data-src]');
+
+    if ('IntersectionObserver' in window) {
+      if (lazyObserver) lazyObserver.disconnect();
+      lazyObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const el = entry.target;
+            const src = el.getAttribute('data-src');
+            if (!src) return;
+            el.style.backgroundImage = `url('${src}')`;
+            // Preload via Image object so we know when it's done
+            const preload = new Image();
+            preload.src = src;
+            preload.onload = () => {
+              el.classList.add('loaded');
+              el.removeAttribute('data-src');
+            };
+            lazyObserver.unobserve(el);
+          }
+        });
+      }, { rootMargin: '200px 0px' }); // start loading 200px before it enters view
+
+      lazyImgs.forEach(el => lazyObserver.observe(el));
+    } else {
+      // Fallback for old browsers — load everything
+      lazyImgs.forEach(el => {
+        el.style.backgroundImage = `url('${el.getAttribute('data-src')}')`;
+        el.classList.add('loaded');
+        el.removeAttribute('data-src');
+      });
+    }
+  }
+
+  /* Contact form — powered by Formspree */
+  async function handleSubmit(e) {
+    e.preventDefault();
+    const f = e.target;
+    const btn = f.querySelector('.btn-submit');
+
+    // ▼ Replace YOUR_FORM_ID with your ID from formspree.io (free signup)
+    const FORMSPREE_ID = 'YOUR_FORM_ID';
+
+    if (FORMSPREE_ID === 'YOUR_FORM_ID') {
+      // Fallback to mailto until Formspree is set up
+      const subject = encodeURIComponent(`Portfolio Inquiry – ${f.projectType.value || 'General'}`);
+      const body = encodeURIComponent(
+        `Name: ${f.firstName.value} ${f.lastName.value}\nEmail: ${f.email.value}\nProject Type: ${f.projectType.value}\n\nMessage:\n${f.message.value}`
+      );
+      window.location.href = `mailto:aidanarria@gmail.com?subject=${subject}&body=${body}`;
+      return;
+    }
+
+    btn.textContent = 'Sending…';
+    btn.disabled = true;
+
+    try {
+      const data = new FormData();
+      data.append('firstName', f.firstName.value);
+      data.append('lastName', f.lastName.value);
+      data.append('email', f.email.value);
+      data.append('projectType', f.projectType.value);
+      data.append('message', f.message.value);
+
+      const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (res.ok) {
+        btn.textContent = '✓ Message Sent!';
+        btn.style.background = '#6b8f5e';
+        f.reset();
+        setTimeout(() => {
+          btn.innerHTML = 'Send Message <svg width="18" height="8" viewBox="0 0 18 8" fill="none"><path d="M0 4H16M12 1L16 4L12 7" stroke="currentColor" stroke-width="1.2"/></svg>';
+          btn.style.background = '';
+          btn.disabled = false;
+        }, 4000);
+      } else {
+        throw new Error('Send failed');
+      }
+    } catch (err) {
+      btn.textContent = 'Something went wrong — try again';
+      btn.style.background = '#8f3a3a';
+      btn.disabled = false;
+      setTimeout(() => {
+        btn.innerHTML = 'Send Message <svg width="18" height="8" viewBox="0 0 18 8" fill="none"><path d="M0 4H16M12 1L16 4L12 7" stroke="currentColor" stroke-width="1.2"/></svg>';
+        btn.style.background = '';
+      }, 3000);
+    }
+  }
+</script>
+</body>
+</html>
