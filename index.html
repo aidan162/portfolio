@@ -533,6 +533,12 @@
     columns: 3;
     column-gap: 0.6rem;
   }
+  /* Shimmer keyframe for loading placeholder */
+  @keyframes shimmer {
+    0%   { background-position: -800px 0; }
+    100% { background-position:  800px 0; }
+  }
+
   .gallery-photo {
     break-inside: avoid;
     overflow: hidden; border-radius: 3px;
@@ -545,13 +551,27 @@
     min-height: 180px;
     display: block;
     background-size: cover; background-position: center;
-    transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.5s ease;
+    opacity: 0;
+  }
+  .gallery-photo .g-img.loaded { opacity: 1; }
+  /* Shimmer shown while not yet loaded */
+  .gallery-photo .g-img:not(.loaded) {
+    background-image: linear-gradient(90deg, #2a2520 25%, #3a3028 50%, #2a2520 75%) !important;
+    background-size: 800px 100%;
+    animation: shimmer 1.5s infinite linear;
   }
   /* Portrait photos taller, landscape shorter — set via data attribute */
   .gallery-photo[data-orientation="portrait"] .g-img { aspect-ratio: 4/5; }
   .gallery-photo[data-orientation="landscape"] .g-img { aspect-ratio: 3/2; }
   .gallery-photo:not([data-orientation]) .g-img { aspect-ratio: 4/5; }
   .gallery-photo:hover .g-img { transform: scale(1.03); }
+
+  /* Lazy shimmer for favorites and project cards too */
+  .feat-img, .proj-img, .cat-proj-img {
+    transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.5s ease;
+  }
+  .feat-img.lazy-loaded, .proj-img.lazy-loaded, .cat-proj-img.lazy-loaded { opacity: 1; }
 
   /* Placeholder gradients for gallery photos */
   .gph-1 { background: linear-gradient(150deg, #1a1410 0%, #352820 100%); }
@@ -878,14 +898,16 @@
       heroBg.style.backgroundPosition = 'center';
     }
 
-    // My Favorites
+    // My Favorites — lazy loaded
     const featItems = document.querySelectorAll('.feat-item');
     PHOTOS.favorites.forEach((photo, i) => {
       if (!featItems[i]) return;
-      featItems[i].querySelector('.feat-img').style.backgroundImage = `url('images/favorites/${photo.src}')`;
+      const img = featItems[i].querySelector('.feat-img');
+      img.setAttribute('data-src', `images/favorites/${photo.src}`);
       const txt = featItems[i].querySelector('.feat-overlay-text');
       if (txt && photo.title) txt.textContent = photo.title;
     });
+    initLazyImages();
   });
 
   /* Page navigation */
@@ -945,9 +967,13 @@
       wrap.className = 'gallery-photo';
       const orientation = photo.orientation || 'portrait';
       wrap.setAttribute('data-orientation', orientation);
-      wrap.innerHTML = `<div class="g-img" style="background-image:url('${imgPath(catKey, projKey, photo.src)}');background-size:cover;background-position:center"></div>`;
+      const src = imgPath(catKey, projKey, photo.src);
+      // Store src in data-src — only loads when scrolled into view
+      wrap.innerHTML = `<div class="g-img" data-src="${src}"></div>`;
       gGrid.appendChild(wrap);
     });
+    // Trigger lazy load for newly added images
+    initLazyImages();
     window.scrollTo(0, 0);
   }
 
@@ -972,6 +998,44 @@
   }, { threshold: 0.1 });
   revealEls.forEach(el => observer.observe(el));
 
+  /* ── Lazy image loader ── */
+  let lazyObserver = null;
+
+  function initLazyImages() {
+    const lazyImgs = document.querySelectorAll('[data-src]');
+
+    if ('IntersectionObserver' in window) {
+      if (lazyObserver) lazyObserver.disconnect();
+      lazyObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const el = entry.target;
+            const src = el.getAttribute('data-src');
+            if (!src) return;
+            el.style.backgroundImage = `url('${src}')`;
+            // Preload via Image object so we know when it's done
+            const preload = new Image();
+            preload.src = src;
+            preload.onload = () => {
+              el.classList.add('loaded');
+              el.removeAttribute('data-src');
+            };
+            lazyObserver.unobserve(el);
+          }
+        });
+      }, { rootMargin: '200px 0px' }); // start loading 200px before it enters view
+
+      lazyImgs.forEach(el => lazyObserver.observe(el));
+    } else {
+      // Fallback for old browsers — load everything
+      lazyImgs.forEach(el => {
+        el.style.backgroundImage = `url('${el.getAttribute('data-src')}')`;
+        el.classList.add('loaded');
+        el.removeAttribute('data-src');
+      });
+    }
+  }
+
   /* Contact form — powered by Formspree */
   async function handleSubmit(e) {
     e.preventDefault();
@@ -979,7 +1043,7 @@
     const btn = f.querySelector('.btn-submit');
 
     // ▼ Replace YOUR_FORM_ID with your ID from formspree.io (free signup)
-    const FORMSPREE_ID = 'mjgdovpo';
+    const FORMSPREE_ID = 'YOUR_FORM_ID';
 
     if (FORMSPREE_ID === 'YOUR_FORM_ID') {
       // Fallback to mailto until Formspree is set up
