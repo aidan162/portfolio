@@ -297,7 +297,7 @@ const PHOTOS = {
     "brophy-baseball": {
       title: "Brophy Baseball",
       year: "2025",
-      cover: "1.jpg",
+      cover: "1.JPG",
       photos: [
         { src: "1.JPG", alt: "Basketball 1", orientation:"portrait"   },       
         { src: "2.JPG", alt: "Basketball 1", orientation:"portrait"   },
