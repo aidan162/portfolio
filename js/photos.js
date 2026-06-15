@@ -474,7 +474,7 @@ const PHOTOS = {
   events: {
 
     "little-league-opening": {
-      title: "Little League Opening",
+      title: "Coming Soon",
       year: "2024",
       cover: "ll-1.svg",
       photos: [
@@ -488,7 +488,7 @@ const PHOTOS = {
     },
 
     "arcadia-hs-grad": {
-      title: "Arcadia HS Graduation",
+      title: "Coming Soon",
       year: "2024",
       cover: "grad-1.svg",
       photos: [
@@ -501,31 +501,55 @@ const PHOTOS = {
       ],
     },
 
-    "community-fest": {
-      title: "Community Fest",
-      year: "2023",
-      cover: "fest-1.svg",
+    "brophy-stampede": {
+      title: "The STAMPEDED",
+      year: "2025",
+      cover: "7.jpg",
       photos: [
-        { src: "fest-1.svg", alt: "Community fest 1" },
-        { src: "fest-2.svg", alt: "Community fest 2" },
-        { src: "fest-3.svg", alt: "Community fest 3" },
-        { src: "fest-4.svg", alt: "Community fest 4" },
-        { src: "fest-5.svg", alt: "Community fest 5" },
-        { src: "fest-6.svg", alt: "Community fest 6" },
+      { src: "1.jpg", alt: "Basketball 1", orientation:"landscape"   },       
+        { src: "2.jpg", alt: "Basketball 1", orientation:"landscape"   },
+        { src: "3.jpg", alt: "Basketball 1", orientation:"landscape"   },        
+        { src: "4.jpg", alt: "Basketball 1", orientation:"portrait"   },        
+        { src: "5.jpg", alt: "Basketball 1", orientation:"portrait"   },
+        { src: "6.jpg", alt: "Basketball 1", orientation:"portrait"   },       
+        { src: "7.jpg", alt: "Basketball 1", orientation:"portrait"   },
+        { src: "8.jpg", alt: "Basketball 1", orientation:"landscape"   },        
+        { src: "9.jpg", alt: "Basketball 1", orientation:"landscape"   },        
+        { src: "10.jpg", alt: "Basketball 1", orientation:"portrait"   },
+        { src: "11.jpg", alt: "Basketball 1", orientation:"landscape"   },       
+        { src: "12.jpg", alt: "Basketball 1", orientation:"landscape"   },
+        { src: "13.jpg", alt: "Basketball 1", orientation:"portrait"   },        
+        { src: "14.jpg", alt: "Basketball 1", orientation:"portrait"   }, 
       ],
     },
 
-    "awards-night": {
-      title: "Awards Night",
-      year: "2023",
-      cover: "awards-1.svg",
+    "pep-rally": {
+      title: "Brophy Pep Rallys",
+      year: "2025",
+      cover: "1.jpg",
       photos: [
-        { src: "awards-1.svg", alt: "Awards night 1" },
-        { src: "awards-2.svg", alt: "Awards night 2" },
-        { src: "awards-3.svg", alt: "Awards night 3" },
-        { src: "awards-4.svg", alt: "Awards night 4" },
-        { src: "awards-5.svg", alt: "Awards night 5" },
-        { src: "awards-6.svg", alt: "Awards night 6" },
+        { src: "1.jpg", alt: "Basketball 1", orientation:"portrait"   },       
+        { src: "2.jpg", alt: "Basketball 1", orientation:"portrait"   },
+        { src: "3.jpg", alt: "Basketball 1", orientation:"portrait"   },        
+        { src: "4.jpg", alt: "Basketball 1", orientation:"portrait"   },        
+        { src: "5.jpg", alt: "Basketball 1", orientation:"portrait"   },
+        { src: "6.jpg", alt: "Basketball 1", orientation:"portrait"   },       
+        { src: "7.jpg", alt: "Basketball 1", orientation:"portrait"   },
+        { src: "8.jpg", alt: "Basketball 1", orientation:"portrait"   },        
+        { src: "9.jpg", alt: "Basketball 1", orientation:"portrait"   },        
+        { src: "10.jpg", alt: "Basketball 1", orientation:"portrait"   },
+        { src: "11.jpg", alt: "Basketball 1", orientation:"portrait"   },       
+        { src: "12.jpg", alt: "Basketball 1", orientation:"landscape"   },
+        { src: "13.jpg", alt: "Basketball 1", orientation:"landscape"   },        
+        { src: "14.jpg", alt: "Basketball 1", orientation:"landscape"   },        
+        { src: "15.jpg", alt: "Basketball 1", orientation:"landscape"   },
+        { src: "16.jpg", alt: "Basketball 1", orientation:"landscape"   },        
+        { src: "17.jpg", alt: "Basketball 1", orientation:"landscape"   },
+        { src: "18.jpg", alt: "Basketball 1", orientation:"landscape"   },       
+        { src: "19.jpg", alt: "Basketball 1", orientation:"landscape"   },
+        { src: "20.jpg", alt: "Basketball 1", orientation:"landscape"   },        
+        { src: "21.jpg", alt: "Basketball 1", orientation:"landscape"   },        
+        { src: "22.jpg", alt: "Basketball 1", orientation:"landscape"   },
       ],
     },
 
