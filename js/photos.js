@@ -502,7 +502,7 @@ const PHOTOS = {
     },
 
     "brophy-stampede": {
-      title: "The STAMPEDED",
+      title: "The STAMPEDE",
       year: "2025",
       cover: "7.jpg",
       photos: [

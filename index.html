@@ -690,7 +690,7 @@
       <h2 class="section-title">Projects</h2>
     </div>
     <div class="projects-grid">
-      <div class="project-card reveal" onclick="showCategory('portraiture')">
+      <div class="project-card reveal" data-cat="portraiture" onclick="showCategory('portraiture')">
         <div class="proj-img proj-ph-1"></div>
         <div class="proj-info">
           <div class="proj-category">Portrait</div>
@@ -698,7 +698,7 @@
           <div class="proj-count">View collection</div>
         </div>
       </div>
-      <div class="project-card reveal" style="transition-delay:.1s" onclick="showCategory('nature')">
+      <div class="project-card reveal" style="transition-delay:.1s" data-cat="nature" onclick="showCategory('nature')">
         <div class="proj-img proj-ph-2"></div>
         <div class="proj-info">
           <div class="proj-category">Landscape</div>
@@ -706,7 +706,7 @@
           <div class="proj-count">View collection</div>
         </div>
       </div>
-      <div class="project-card reveal" style="transition-delay:.2s" onclick="showCategory('sports')">
+      <div class="project-card reveal" style="transition-delay:.2s" data-cat="sports" onclick="showCategory('sports')">
         <div class="proj-img proj-ph-3"></div>
         <div class="proj-info">
           <div class="proj-category">Action</div>
@@ -714,7 +714,7 @@
           <div class="proj-count">View collection</div>
         </div>
       </div>
-      <div class="project-card reveal" style="transition-delay:.3s" onclick="showCategory('events')">
+      <div class="project-card reveal" style="transition-delay:.3s" data-cat="events" onclick="showCategory('events')">
         <div class="proj-img proj-ph-4"></div>
         <div class="proj-info">
           <div class="proj-category">Coverage</div>
@@ -907,6 +907,17 @@
       const txt = featItems[i].querySelector('.feat-overlay-text');
       if (txt && photo.title) txt.textContent = photo.title;
     });
+
+    // Project tab tiles (Portraiture / Nature / Sports / Events) — lazy loaded
+    if (PHOTOS.covers) {
+      document.querySelectorAll('.project-card[data-cat]').forEach(card => {
+        const cover = PHOTOS.covers[card.dataset.cat];
+        if (!cover) return;
+        const img = card.querySelector('.proj-img');
+        img.setAttribute('data-src', `images/covers/${cover.src}`);
+      });
+    }
+
     initLazyImages();
   });
 
