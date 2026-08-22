@@ -46,6 +46,16 @@ const PHOTOS = {
     { src: "33.jpeg", alt: "Favorite photo 6", title: "Brophy Soccer, 2026" },
   ],
 
+  // ── PROJECT TAB COVERS ───────────────────────────────────
+// One image per top-level tab on the homepage (Portraiture,
+// Nature, Sports, Events). Put these 4 files in images/covers/.
+covers: {
+  portraiture: { src: "40.jpg", alt: "Portraiture cover" },
+  nature:      { src: "50.jpg", alt: "Nature cover" },
+  sports:      { src: "60.jpg", alt: "Sports cover" },
+  events:      { src: "70.jpg", alt: "Events cover" },
+},
+  
   // ── PORTRAITURE PROJECTS ─────────────────────────────────
   // Each key is a project. The "cover" image is the first one
   // in the array — it shows on the Portraiture landing page.
