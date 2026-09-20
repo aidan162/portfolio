@@ -234,6 +234,82 @@
   .feat-ph-5 { background: linear-gradient(140deg, #1c2418 0%, #2e3d28 100%); }
   .feat-ph-6 { background: linear-gradient(130deg, #1e1c28 0%, #302d42 100%); }
 
+  /* ── CLIENTS / LOGO MARQUEE ── */
+  #clients {
+    padding: 2.4rem 0;
+    border-top: 1px solid var(--light-rule);
+    border-bottom: 1px solid var(--light-rule);
+    background: var(--cream);
+    overflow: hidden;
+  }
+  .logo-marquee {
+    width: 100%;
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+    mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  }
+  .logo-track {
+    display: flex;
+    align-items: center;
+    gap: 4.5rem;
+    width: max-content;
+    animation: logoScroll 32s linear infinite;
+  }
+  .logo-marquee:hover .logo-track { animation-play-state: paused; }
+  .logo-item {
+    height: 2.1rem;
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .logo-item img {
+    height: 100%; width: auto; max-width: 150px;
+    object-fit: contain;
+    filter: grayscale(1) opacity(0.5);
+    transition: filter 0.3s ease;
+  }
+  .logo-item img:hover { filter: grayscale(0) opacity(1); }
+  .logo-item-placeholder {
+    font-family: 'Playfair Display', serif;
+    text-transform: uppercase; letter-spacing: 0.1em;
+    font-size: 0.8rem; color: var(--warm-mid); white-space: nowrap;
+    border: 1px dashed var(--light-rule); border-radius: 3px;
+    padding: 0.5rem 1.3rem;
+  }
+  @keyframes logoScroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* ── VIDEO REELS (under My Favorites) ── */
+  .reel-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+    margin-top: 0.75rem;
+  }
+  .reel-item {
+    position: relative; overflow: hidden; border-radius: 3px;
+    aspect-ratio: 16/9;
+    background: linear-gradient(150deg, #201a16 0%, #362c22 100%);
+  }
+  .reel-item video {
+    width: 100%; height: 100%; object-fit: cover; display: block; background: #000;
+  }
+  .reel-caption {
+    position: absolute; left: 0; right: 0; bottom: 0; z-index: 2;
+    padding: 1rem 1.2rem; pointer-events: none;
+    font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: #fff;
+    background: linear-gradient(to top, rgba(10,8,6,0.75), transparent);
+  }
+  .reel-placeholder-text {
+    position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+    color: rgba(245,242,237,0.35);
+    font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase;
+  }
+  @media (max-width: 700px) {
+    .reel-grid { grid-template-columns: 1fr; }
+  }
+
   /* ── PROJECTS (main page) ── */
   #projects { padding: 6rem 3rem; background: var(--ink); color: var(--cream); }
   #projects .section-header { border-top-color: rgba(245,242,237,0.2); }
@@ -647,8 +723,10 @@
 
   <!-- HERO -->
   <section class="hero">
-    <!-- ▼ PHOTO: uncomment when ready: <img class="hero-bg" src="images/hero/hero.jpg" alt=""> -->
-    <div class="hero-bg-fallback"></div>
+    <!-- Showreel video — filled in by JS if PHOTOS.showreel.src is set in photos.js.
+         Falls back to the hero photo automatically if no video is configured. -->
+    <video class="hero-bg" id="heroVideo" autoplay muted loop playsinline style="display:none;"></video>
+    <div class="hero-bg-fallback" id="heroFallback"></div>
     <div class="hero-overlay"></div>
     <div class="hero-content">
       <h1 class="hero-name">Aidan Arria</h1>
@@ -663,6 +741,15 @@
     <div class="hero-scroll">
       <div class="scroll-line"></div>
       Scroll
+    </div>
+  </section>
+
+  <!-- CLIENTS / LOGO MARQUEE — companies & organizations worked with -->
+  <section id="clients">
+    <div class="logo-marquee">
+      <div class="logo-track" id="logoTrack">
+        <!-- Populated by JS from PHOTOS.clients in photos.js -->
+      </div>
     </div>
   </section>
 
@@ -681,6 +768,9 @@
       <div class="feat-item reveal" style="transition-delay:.25s"><div class="feat-img feat-ph-5"></div><div class="feat-overlay"><span class="feat-overlay-text">The Match</span></div></div>
       <div class="feat-item reveal" style="transition-delay:.3s"><div class="feat-img feat-ph-6"></div><div class="feat-overlay"><span class="feat-overlay-text">Still Light</span></div></div>
     </div>
+
+    <!-- VIDEO REELS — 2 slots, populated by JS from PHOTOS.reels in photos.js -->
+    <div class="reel-grid" id="reelGrid"></div>
   </section>
 
   <!-- PROJECTS -->
@@ -890,13 +980,33 @@
 
   /* Boot: wire hero + favorites from photos.js */
   document.addEventListener('DOMContentLoaded', () => {
-    // Hero background
-    if (PHOTOS.hero && PHOTOS.hero[0]) {
-      const heroBg = document.querySelector('.hero-bg-fallback');
-      heroBg.style.backgroundImage = `url('images/hero/${PHOTOS.hero[0].src}')`;
-      heroBg.style.backgroundSize = 'cover';
-      heroBg.style.backgroundPosition = 'center';
+    // Hero background — video showreel if configured, else the hero photo
+    const heroVideo = document.getElementById('heroVideo');
+    const heroFallback = document.getElementById('heroFallback');
+    if (PHOTOS.showreel && PHOTOS.showreel.src) {
+      const source = document.createElement('source');
+      source.src = `videos/${PHOTOS.showreel.src}`;
+      source.type = 'video/mp4';
+      heroVideo.appendChild(source);
+      heroVideo.style.display = 'block';
+      heroFallback.style.display = 'none';
+      heroVideo.load();
+      // If autoplay is blocked for any reason, fall back to the photo instead of a black screen
+      heroVideo.play().catch(() => {
+        heroVideo.style.display = 'none';
+        heroFallback.style.display = 'block';
+      });
+    } else if (PHOTOS.hero && PHOTOS.hero[0]) {
+      heroFallback.style.backgroundImage = `url('images/hero/${PHOTOS.hero[0].src}')`;
+      heroFallback.style.backgroundSize = 'cover';
+      heroFallback.style.backgroundPosition = 'center';
     }
+
+    // Client / logo marquee
+    initLogoMarquee();
+
+    // Video reels under My Favorites
+    initReels();
 
     // My Favorites — lazy loaded
     const featItems = document.querySelectorAll('.feat-item');
@@ -920,6 +1030,47 @@
 
     initLazyImages();
   });
+
+  /* Client / logo marquee */
+  function initLogoMarquee() {
+    const track = document.getElementById('logoTrack');
+    if (!track) return;
+    const clients = PHOTOS.clients || [];
+
+    if (clients.length === 0) {
+      // Placeholder pills so the strip isn't empty until real logos are added
+      const placeholders = ['Your Client', 'Their Team', 'That Org', 'This School', 'A Brand'];
+      const html = placeholders.map(n => `<div class="logo-item logo-item-placeholder">${n}</div>`).join('');
+      track.innerHTML = html + html;
+      return;
+    }
+
+    // Duplicate the list once so the CSS animation (translateX -50%) loops seamlessly
+    const itemHtml = clients.map(c =>
+      `<div class="logo-item"><img src="images/clients/${c.src}" alt="${c.name || 'Client logo'}" loading="lazy"></div>`
+    ).join('');
+    track.innerHTML = itemHtml + itemHtml;
+  }
+
+  /* Video reels under My Favorites */
+  function initReels() {
+    const grid = document.getElementById('reelGrid');
+    if (!grid) return;
+    const reels = PHOTOS.reels || [];
+    grid.innerHTML = reels.map(r => {
+      if (!r.src) {
+        return `<div class="reel-item"><div class="reel-placeholder-text">Video Coming Soon</div></div>`;
+      }
+      const poster = r.poster ? ` poster="images/reels/${r.poster}"` : '';
+      const caption = r.title ? `<div class="reel-caption">${r.title}</div>` : '';
+      return `<div class="reel-item">
+        <video class="reel-video" controls preload="metadata"${poster}>
+          <source src="videos/${r.src}" type="video/mp4">
+        </video>
+        ${caption}
+      </div>`;
+    }).join('');
+  }
 
   /* Page navigation */
   let currentCategory = null;

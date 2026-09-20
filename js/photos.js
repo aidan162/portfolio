@@ -29,9 +29,44 @@ const PHOTOS = {
 
   // ── HERO ─────────────────────────────────────────────────
   // One image shown full-screen behind your name on the homepage.
-  // Replace with your best shot.
+  // Used automatically if no showreel video is set below.
   hero: [
     { src: "30.jpeg", alt: "Hero background photo" },
+  ],
+
+  // ── HERO SHOWREEL VIDEO (optional) ────────────────────────
+  // A short, muted, looping video that plays automatically behind
+  // your name instead of the hero photo above.
+  //   1. Export it as an .mp4, ideally under ~15MB (compress it —
+  //      see the note Claude gave you about video hosting).
+  //   2. Drop it in videos/ (make a "videos" folder next to "images").
+  //   3. Put the filename below.
+  // Leave src as "" to keep using the hero photo instead.
+  showreel: {
+    src: "", // e.g. "showreel.mp4"
+  },
+
+  // ── CLIENT / COMPANY LOGOS (scrolling strip) ──────────────
+  // Logos that scroll across the homepage between the hero and
+  // "My Favorites." Use PNGs with transparent backgrounds if you
+  // can — they'll be shown in grayscale automatically and go full
+  // color on hover.
+  //   1. Drop logo files into images/clients/
+  //   2. Add an entry below for each one
+  // Leave this array empty to show placeholder pills instead.
+  clients: [
+    // { src: "logo-brophy.png", name: "Brophy Prep" },
+    // { src: "logo-arcadia.png", name: "Arcadia High School" },
+  ],
+
+  // ── VIDEO REELS (2 slots, shown under My Favorites) ───────
+  // Add up to 2 videos here. Each needs an .mp4 in videos/ and,
+  // optionally, a poster thumbnail image in images/reels/ (shown
+  // before the video is played). Leave src as "" for a slot to
+  // show a "Video Coming Soon" placeholder instead.
+  reels: [
+    { src: "", poster: "", title: "" }, // e.g. { src: "reel-1.mp4", poster: "reel-1.jpg", title: "2026 Sports Reel" }
+    { src: "", poster: "", title: "" },
   ],
 
   // ── MY FAVORITES ─────────────────────────────────────────
