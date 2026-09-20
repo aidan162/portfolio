@@ -50,8 +50,8 @@ const PHOTOS = {
 // One image per top-level tab on the homepage (Portraiture,
 // Nature, Sports, Events). Put these 4 files in images/covers/.
 covers: {
-  portraiture: { src: "40.jpg", alt: "Portraiture cover" },
-  nature:      { src: "50.jpg", alt: "Nature cover" },
+  portraiture: { src: "40.jpeg", alt: "Portraiture cover" },
+  nature:      { src: "50.jpeg", alt: "Nature cover" },
   sports:      { src: "60.jpg", alt: "Sports cover" },
   events:      { src: "70.jpg", alt: "Events cover" },
 },
