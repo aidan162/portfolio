@@ -75,8 +75,8 @@ const PHOTOS = {
   //
   // Leave a slot as { } for a "Video Coming Soon" placeholder.
   reels: [
-    { youtubeId: "", title: "" },
-    { youtubeId: "", title: "" },
+    { youtubeId: "4F3TPKbgKMM", title: "NIKE X BROPHY" },
+    { youtubeId: "AYnDOeniP48", title: "FASHION SHOW 2026" },
   ],
 
   // ── MY FAVORITES ─────────────────────────────────────────
