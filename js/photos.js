@@ -43,7 +43,7 @@ const PHOTOS = {
   //   3. Put the filename below.
   // Leave src as "" to keep using the hero photo instead.
   showreel: {
-    src: "", // e.g. "showreel.mp4"
+    src: "edit.mp4", // e.g. "showreel.mp4"
   },
 
   // ── CLIENT / COMPANY LOGOS (scrolling strip) ──────────────
