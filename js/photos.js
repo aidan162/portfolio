@@ -65,21 +65,30 @@ covers: {
 
     "senior-portraits": {
       title: "Senior Portraits",
-      year: "2024",
-      cover: "senior-1.svg",       // ← shown on landing page card
+      year: "2026",
+      cover: "1.jpeg",       // ← shown on landing page card
       photos: [
-        { src: "senior-1.svg", alt: "Senior portrait 1" },
-        { src: "senior-2.svg", alt: "Senior portrait 2" },
-        { src: "senior-3.svg", alt: "Senior portrait 3" },
-        { src: "senior-4.svg", alt: "Senior portrait 4" },
-        { src: "senior-5.svg", alt: "Senior portrait 5" },
-        { src: "senior-6.svg", alt: "Senior portrait 6" },
+        { src: "1.jpeg", alt: "Senior portrait 1" },
+        { src: "2.jpeg", alt: "Senior portrait 2" },
+        { src: "3.jpeg", alt: "Senior portrait 3" },
+        { src: "4.jpeg", alt: "Senior portrait 4" },
+        { src: "5.jpeg", alt: "Senior portrait 5" },
+        { src: "6.jpeg", alt: "Senior portrait 6" },
+        { src: "7.jpeg", alt: "Senior portrait 2" },
+        { src: "8.jpeg", alt: "Senior portrait 3" },
+        { src: "9.jpeg", alt: "Senior portrait 4" },
+        { src: "10.jpeg", alt: "Senior portrait 5" },
+        { src: "11.jpeg", alt: "Senior portrait 6" },
+        { src: "12.jpeg", alt: "Senior portrait 3" },
+        { src: "13.jpeg", alt: "Senior portrait 4" },
+        { src: "14.jpeg", alt: "Senior portrait 5" },
+        { src: "15.jpeg", alt: "Senior portrait 6" },
       ],
     },
 
     "natural-light": {
-      title: "Natural Light",
-      year: "2024",
+      title: "Coming Soon",
+      year: "2027",
       cover: "natural-1.svg",
       photos: [
         { src: "natural-1.svg", alt: "Natural light portrait 1" },
@@ -92,8 +101,8 @@ covers: {
     },
 
     "studio-series": {
-      title: "Studio Series",
-      year: "2024",
+      title: "Coming Soon",
+      year: "2027",
       cover: "studio-1.svg",
       photos: [
         { src: "studio-1.svg", alt: "Studio portrait 1" },
@@ -106,8 +115,8 @@ covers: {
     },
 
     "street-faces": {
-      title: "Street Faces",
-      year: "2023",
+      title: "Coming Soon",
+      year: "2027",
       cover: "street-1.svg",
       photos: [
         { src: "street-1.svg", alt: "Street portrait 1" },
