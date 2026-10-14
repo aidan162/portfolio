@@ -122,15 +122,17 @@ covers: {
     // 👇 the 2 homepage videos: just rename src (video) and poster (thumbnail)
     featured: [
       { src: "eteique.mov", poster: "mixtape-1.jpg" },
-      { src: "untitled.mov", poster: "mixtape-2.jpg" },
+      { src: "Untitled.mov", poster: "mixtape-2.jpg" },
     ],
     // 👇 "See More Work" page. To add more, copy any line and change the names.
     gallery: [
-      { video: "promo-1.mp4", poster: "promo-1.jpg", orientation: "portrait" },
-      { video: "promo-2.mp4", poster: "promo-2.jpg", orientation: "portrait" },
-      { video: "promo-3.mp4", poster: "promo-3.jpg", orientation: "portrait" },
-      { video: "promo-4.mp4", poster: "promo-4.jpg", orientation: "portrait" },
-      { video: "promo-5.mp4", poster: "promo-5.jpg", orientation: "portrait" },
+      { video: "eteique.mov", poster: "promo-1.jpg", orientation: "portrait" },
+      { video: "Untitled.mov", poster: "promo-2.jpg", orientation: "portrait" },
+      { video: "1.mov", poster: "promo-3.jpg", orientation: "portrait" },
+      { video: "2.mov", poster: "promo-4.jpg", orientation: "portrait" },
+      { video: "3.mov", poster: "promo-5.jpg", orientation: "portrait" },
+      { video: "4.mov", poster: "promo-5.jpg", orientation: "portrait" },
+      { video: "5.mov", poster: "promo-5.jpg", orientation: "portrait" },
       { src: "1.jpg", alt: "Photo 1" },
       { src: "2.jpg", alt: "Photo 2" },
       { src: "3.jpg", alt: "Photo 3" },
