@@ -149,8 +149,8 @@ covers: {
     title: "Real Estate",
     description: "I create listing videos, listing photos, and personal brand promotional content for real estate agents and teams. Whether you're launching a new listing or building your brand, I'll help you stand out.",
     featured: [
-      { src: "listing-1.mp4", poster: "listing-1.jpg" },
-      { src: "listing-2.mp4", poster: "listing-2.jpg" },
+      { src: "listing-1.mov", poster: "listing-1.jpg" },
+      { src: "listing-2.mov", poster: "listing-2.jpg" },
     ],
   },
 
