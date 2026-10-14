@@ -81,11 +81,11 @@ const PHOTOS = {
   //     .mp4 goes in videos/, poster thumbnail (optional) in images/reels/
   //
   // Leave a slot as { } for a "Video Coming Soon" placeholder.
-  reels: [
+  reels: [ 
     { youtubeId: "4F3TPKbgKMM", title: "NIKE X BROPHY" },
     { youtubeId: "AYnDOeniP48", title: "FASHION SHOW 2026" },
-    { },   // ← NEW slot: replace with { youtubeId: "VIDEO_ID", title: "TITLE" }
-    { },   // ← NEW slot: replace with { youtubeId: "VIDEO_ID", title: "TITLE" }
+    { youtubeId: "Of3eXICoGLM", title: "BROPHY HYPE REEL" },  
+    { youtubeId: "Of3eXICoGLM", title: "BROPHY HYPE REEL" },   
   ],
 
   // ── MY FAVORITES ─────────────────────────────────────────
@@ -121,16 +121,18 @@ covers: {
     instagram: "https://www.instagram.com/brophystampede/",
     // 👇 the 2 homepage videos: just rename src (video) and poster (thumbnail)
     featured: [
-      { src: "mixtape-1.mp4", poster: "mixtape-1.jpg" },
-      { src: "mixtape-2.mp4", poster: "mixtape-2.jpg" },
+      { src: "eteique.mov", poster: "mixtape-1.jpg" },
+      { src: "Untitled.mov", poster: "mixtape-2.jpg" },
     ],
     // 👇 "See More Work" page. To add more, copy any line and change the names.
     gallery: [
-      { video: "promo-1.mp4", poster: "promo-1.jpg", orientation: "portrait" },
-      { video: "promo-2.mp4", poster: "promo-2.jpg", orientation: "portrait" },
-      { video: "promo-3.mp4", poster: "promo-3.jpg", orientation: "portrait" },
-      { video: "promo-4.mp4", poster: "promo-4.jpg", orientation: "portrait" },
-      { video: "promo-5.mp4", poster: "promo-5.jpg", orientation: "portrait" },
+      { video: "eteique.mov", poster: "promo-1.jpg", orientation: "portrait" },
+      { video: "Untitled.mov", poster: "promo-2.jpg", orientation: "portrait" },
+      { video: "1.mov", poster: "promo-3.jpg", orientation: "portrait" },
+      { video: "2.mov", poster: "promo-4.jpg", orientation: "portrait" },
+      { video: "3.mov", poster: "promo-5.jpg", orientation: "portrait" },
+      { video: "4.mov", poster: "promo-5.jpg", orientation: "portrait" },
+      { video: "5.mov", poster: "promo-5.jpg", orientation: "portrait" },
       { src: "1.jpg", alt: "Photo 1" },
       { src: "2.jpg", alt: "Photo 2" },
       { src: "3.jpg", alt: "Photo 3" },
@@ -147,8 +149,8 @@ covers: {
     title: "Real Estate",
     description: "I create listing videos, listing photos, and personal brand promotional content for real estate agents and teams. Whether you're launching a new listing or building your brand, I'll help you stand out.",
     featured: [
-      { src: "listing-1.mp4", poster: "listing-1.jpg" },
-      { src: "listing-2.mp4", poster: "listing-2.jpg" },
+      { src: "listing-1.mov", poster: "listing-1.jpg" },
+      { src: "listing-2.mov", poster: "listing-2.jpg" },
     ],
   },
 
