@@ -674,6 +674,39 @@
   .gph-5 { background: linear-gradient(155deg, #1c1812 0%, #2e2818 100%); }
   .gph-6 { background: linear-gradient(125deg, #181c1a 0%, #253028 100%); }
 
+  /* ── FEATURE ROWS (Brophy Stampede / Real Estate) ── */
+  .feature-row { padding: 6rem 3rem; }
+  #stampede { border-top: 1px solid var(--light-rule); }
+  #realestate { background: var(--ink); color: var(--cream); }
+  #realestate .section-num { color: var(--accent); }
+  .feature-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+  .feature-title {
+    font-family: 'Playfair Display', serif; text-transform: uppercase;
+    font-size: clamp(1.8rem, 3vw, 2.8rem); font-weight: 900; margin: 0.8rem 0 1.5rem;
+  }
+  .feature-desc { font-size: 0.95rem; line-height: 1.9; color: var(--warm-mid); margin-bottom: 2rem; max-width: 34rem; }
+  #realestate .feature-desc { color: rgba(245,242,237,0.6); }
+  .feature-actions { display: flex; align-items: center; gap: 1.8rem; flex-wrap: wrap; }
+  a.btn-submit { text-decoration: none; }
+  .feature-videos { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; width: 100%; max-width: 560px; justify-self: end; }
+  .vid-card {
+    position: relative; overflow: hidden; border-radius: 3px; aspect-ratio: 9 / 16;
+    background: linear-gradient(150deg, #201a16 0%, #362c22 100%);
+  }
+  .vid-card video { width: 100%; height: 100%; object-fit: cover; display: block; background: #000; }
+  .gallery-photo.is-video.vid-missing {
+    position: relative; aspect-ratio: 9 / 16;
+    background: linear-gradient(150deg, #201a16 0%, #362c22 100%);
+  }
+  .gallery-photo.is-video.vid-missing[data-orientation="landscape"] { aspect-ratio: 16 / 9; }
+  #gallery-extra:not(:empty) { margin-bottom: 2.5rem; }
+  .gallery-photo.is-video video { width: 100%; height: auto; display: block; background: #000; border-radius: 3px; }
+  @media (max-width: 900px) {
+    .feature-row { padding: 4rem 1.5rem; }
+    .feature-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .feature-videos { justify-self: start; max-width: 480px; }
+  }
+
   /* ── RESPONSIVE ── */
   @media (max-width: 900px) {
     nav { padding: 1.2rem 1.5rem; }
@@ -832,6 +865,38 @@
     </div>
   </section>
 
+  <!-- BROPHY STAMPEDE -->
+  <section id="stampede" class="feature-row">
+    <div class="feature-grid">
+      <div class="feature-text reveal">
+        <span class="section-num">03</span>
+        <h2 class="feature-title" id="stampede-title"></h2>
+        <div class="rule-accent"></div>
+        <p class="feature-desc" id="stampede-desc"></p>
+        <div class="feature-actions">
+          <a class="btn-submit" onclick="showStampede()">See More Work</a>
+        </div>
+      </div>
+      <div class="feature-videos reveal" id="stampede-videos"></div>
+    </div>
+  </section>
+
+  <!-- REAL ESTATE -->
+  <section id="realestate" class="feature-row">
+    <div class="feature-grid">
+      <div class="feature-text reveal">
+        <span class="section-num">04</span>
+        <h2 class="feature-title" id="realestate-title"></h2>
+        <div class="rule-accent"></div>
+        <p class="feature-desc" id="realestate-desc"></p>
+        <div class="feature-actions">
+          <a class="btn-submit" onclick="showCategory('realestate')">View Real Estate Work</a>
+        </div>
+      </div>
+      <div class="feature-videos reveal" id="realestate-videos"></div>
+    </div>
+  </section>
+
   <!-- ABOUT -->
   <section id="about">
     <div class="about-img-wrap reveal">
@@ -839,14 +904,12 @@
     </div>
     <div class="about-text">
       <div class="section-header reveal">
-        <span class="section-num">03</span>
+        <span class="section-num">05</span>
         <h2 class="section-title">About</h2>
       </div>
       <div class="rule-accent"></div>
-      <p class="about-body reveal">Hi, I'm Aidan Arria, a photographer and videographer based in Phoenix, Arizona. Over the past 2.5 years, I've focused on capturing sports, events, and the moments that often go unnoticed in the middle of the action.</p>
-      <p class="about-body reveal">My experience includes working with Brophy's The Stampede, covering a wide range of athletic events, as well as creating content for Arcadia Little League and Arcadia High School sports. Whether I'm on the sidelines of a championship game or covering a community event, I aim to tell stories through authentic, well-timed images and video.</p>
-      <p class="about-body reveal">Beyond shooting, I enjoy the entire creative process, from planning and filming to editing and delivering a final product that feels polished and purposeful.</p>
-      <p class="about-body reveal">I'm always looking for new opportunities and projects. If you're interested in photography, videography, event coverage, sports media, or creative content, I'd love to connect.</p>
+      <p class="about-body reveal">I’m a Phoenix-based photographer and videographer with three years of experience creating content for sports, real estate, schools, and local businesses. I’ve worked with Brophy’s Stampede, Arcadia Little League, and real estate clients, capturing everything from sports and school events to property photos and videos. I enjoy the entire process, from shooting to editing, and I’m always looking for ways to improve my work and try new creative ideas.</p>
+      <p class="about-body reveal">My work has earned recognition, including winning the Nike content challenge for Brophy Football, receiving a Scholastic Art Award, and earning a Certificate of Excellence at the Brophy Art Showcase. I’m always looking for new projects and opportunities to work with people who need creative content. Whether you’re looking for event coverage, sports photography, real estate media, portraits, or social media content, feel free to reach out. I’d love to work with you.</p>
     </div>
   </section>
 
@@ -854,7 +917,7 @@
   <section id="contact">
     <div class="contact-left">
       <div class="section-header reveal">
-        <span class="section-num">04</span>
+        <span class="section-num">06</span>
         <h2 class="section-title" style="color:var(--cream)">Contact</h2>
       </div>
       <h3 class="contact-headline reveal">Let's <em>work.</em></h3>
@@ -934,11 +997,11 @@
 ══════════════════════════════════════ -->
 <div id="category-page">
   <div class="cat-page-inner">
-    <a class="cat-back" onclick="showMain(); scrollToSection('projects')">
+    <a class="cat-back" id="cat-back-btn" onclick="showMain(); scrollToSection('projects')">
       <svg width="16" height="8" viewBox="0 0 16 8" fill="none">
         <path d="M16 4H2M6 1L2 4L6 7" stroke="currentColor" stroke-width="1.2"/>
       </svg>
-      Back to Projects
+      <span id="cat-back-label">Back to Projects</span>
     </a>
     <div class="cat-page-header">
       <span class="cat-page-num" id="cat-num">02</span>
@@ -968,6 +1031,7 @@
         <h2 class="gallery-page-title" id="gallery-title">Project Title</h2>
       </div>
     </div>
+    <div id="gallery-extra"></div>
     <div class="gallery-grid" id="gallery-grid">
       <!-- Populated by JS -->
     </div>
@@ -989,6 +1053,7 @@
     nature:      { label: 'Landscape', title: 'Nature',      num: '02.2' },
     sports:      { label: 'Action',    title: 'Sports',      num: '02.3' },
     events:      { label: 'Coverage',  title: 'Events',      num: '02.4' },
+    realestate:  { label: 'Real Estate', title: 'Real Estate', num: '04' },
   };
 
   function imgPath(cat, projKey, filename) {
@@ -996,7 +1061,7 @@
   }
 
   /* Boot: wire hero + favorites from photos.js */
-  document.addEventListener('DOMContentLoaded', () => {
+  function bootSite() {
     // Hero background — video showreel if configured, else the hero photo
     const heroVideo = document.getElementById('heroVideo');
     const heroFallback = document.getElementById('heroFallback');
@@ -1025,6 +1090,9 @@
     // Video reels under My Favorites
     initReels();
 
+    // Brophy Stampede + Real Estate rows
+    initFeatureRows();
+
     // My Favorites — lazy loaded
     const featItems = document.querySelectorAll('.feat-item');
     PHOTOS.favorites.forEach((photo, i) => {
@@ -1046,7 +1114,7 @@
     }
 
     initLazyImages();
-  });
+  }
 
   /* Client / logo marquee */
   function initLogoMarquee() {
@@ -1110,6 +1178,50 @@
     if (caption) item.appendChild(caption);
   }
 
+  /* Shared video + gallery helpers (photos AND videos, any project) */
+  function videoTag(src, poster) {
+    return `<video controls playsinline preload="metadata"${poster ? ` poster="${poster}"` : ''}><source src="${src}#t=0.1" type="video/mp4" onerror="vidMissing(this)"></video>`;
+  }
+
+  /* If a video file isn't found yet, show a "Coming Soon" box instead of a black one */
+  function vidMissing(el) {
+    const box = el.closest('.vid-card, .gallery-photo');
+    if (!box) return;
+    box.classList.add('vid-missing');
+    box.innerHTML = '<div class="reel-placeholder-text">Video Coming Soon</div>';
+  }
+
+  function renderGalleryItems(gGrid, items, pathFn) {
+    items.forEach(photo => {
+      const wrap = document.createElement('div');
+      wrap.className = 'gallery-photo';
+      wrap.setAttribute('data-orientation', photo.orientation || 'portrait');
+      if (photo.video) {
+        wrap.classList.add('is-video');
+        wrap.innerHTML = videoTag(pathFn(photo.video), photo.poster ? pathFn(photo.poster) : '');
+      } else {
+        // Store src in data-src — only loads when scrolled into view
+        wrap.innerHTML = `<div class="g-img" data-src="${pathFn(photo.src)}"></div>`;
+      }
+      gGrid.appendChild(wrap);
+    });
+  }
+
+  /* Homepage rows: Brophy Stampede + Real Estate (content comes from photos.js) */
+  function initFeatureRows() {
+    [['stampede', PHOTOS.stampede, 'stampede'], ['realestate', PHOTOS.realestateHome, 'realestate']].forEach(([id, cfg, folder]) => {
+      if (!cfg) return;
+      document.getElementById(id + '-title').textContent = cfg.title || '';
+      document.getElementById(id + '-desc').textContent = cfg.description || '';
+      document.getElementById(id + '-videos').innerHTML = [0, 1].map(i => {
+        const v = (cfg.featured || [])[i] || {};
+        if (!v.src) return `<div class="vid-card"><div class="reel-placeholder-text">Video Coming Soon</div></div>`;
+        const p = f => `images/${folder}/${f}`;
+        return `<div class="vid-card">${videoTag(p(v.src), v.poster ? p(v.poster) : '')}</div>`;
+      }).join('');
+    });
+  }
+
   /* Page navigation */
   let currentCategory = null;
 
@@ -1131,6 +1243,10 @@
     document.getElementById('category-page').classList.add('active');
     document.getElementById('cat-num').textContent = meta.num;
     document.getElementById('cat-title').textContent = meta.title;
+    const backBtn = document.getElementById('cat-back-btn');
+    const toRE = catKey === 'realestate';
+    document.getElementById('cat-back-label').textContent = toRE ? 'Back to Real Estate' : 'Back to Projects';
+    backBtn.onclick = () => { showMain(); scrollToSection(toRE ? 'realestate' : 'projects'); };
 
     const grid = document.getElementById('cat-grid');
     grid.innerHTML = '';
@@ -1159,20 +1275,30 @@
     document.getElementById('gallery-category-label').textContent = `${meta.label} / ${meta.title}`;
     document.getElementById('gallery-title').textContent = proj.title;
     document.getElementById('gallery-back-btn').onclick = () => showCategory(catKey);
+    document.getElementById('gallery-extra').innerHTML = '';
 
     const gGrid = document.getElementById('gallery-grid');
     gGrid.innerHTML = '';
-    proj.photos.forEach(photo => {
-      const wrap = document.createElement('div');
-      wrap.className = 'gallery-photo';
-      const orientation = photo.orientation || 'portrait';
-      wrap.setAttribute('data-orientation', orientation);
-      const src = imgPath(catKey, projKey, photo.src);
-      // Store src in data-src — only loads when scrolled into view
-      wrap.innerHTML = `<div class="g-img" data-src="${src}"></div>`;
-      gGrid.appendChild(wrap);
-    });
+    renderGalleryItems(gGrid, proj.photos, f => imgPath(catKey, projKey, f));
     // Trigger lazy load for newly added images
+    initLazyImages();
+    window.scrollTo(0, 0);
+  }
+
+  /* Brophy Stampede page — reuses the gallery page, plus an Instagram button */
+  function showStampede() {
+    const s = PHOTOS.stampede || {};
+    document.getElementById('main-page').classList.remove('active');
+    document.getElementById('category-page').classList.remove('active');
+    document.getElementById('gallery-page').classList.add('active');
+    document.getElementById('gallery-category-label').textContent = 'Student Council / Media';
+    document.getElementById('gallery-title').textContent = s.title || 'Brophy Stampede';
+    document.getElementById('gallery-back-btn').onclick = () => { showMain(); scrollToSection('stampede'); };
+    document.getElementById('gallery-extra').innerHTML = s.instagram
+      ? `<a class="btn-submit" href="${s.instagram}" target="_blank" rel="noopener">View More on Instagram →</a>` : '';
+    const gGrid = document.getElementById('gallery-grid');
+    gGrid.innerHTML = '';
+    renderGalleryItems(gGrid, s.gallery || [], f => `images/stampede/${f}`);
     initLazyImages();
     window.scrollTo(0, 0);
   }
@@ -1294,6 +1420,10 @@
       }, 3000);
     }
   }
+
+  /* Start the site (also works if the page was injected after load) */
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', bootSite);
+  else bootSite();
 </script>
 </body>
 </html>

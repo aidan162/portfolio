@@ -22,6 +22,13 @@
  *  }
  *
  *  SUPPORTED FORMATS: .jpg  .jpeg  .png  .webp  .svg
+ *
+ *  HOW TO ADD A VIDEO (works in ANY project: nature, sports, events,
+ *  real estate, stampede...) — same folder as the photos, same array:
+ *  { video: "clip.mp4", poster: "clip.jpg", orientation: "portrait" }
+ *    • poster = optional thumbnail image (also in that folder)
+ *    • orientation = "portrait" (vertical) or "landscape" (horizontal)
+ *    • keep files small (GitHub web upload limit is 25MB per file)
  * ============================================================
  */
 
@@ -59,7 +66,7 @@ const PHOTOS = {
     // { src: "logo-arcadia.png", name: "Arcadia High School" },
   ],
 
-  // ── VIDEO REELS (2 slots, shown under My Favorites) ───────
+  // ── VIDEO REELS (4 slots, shown under My Favorites) ───────
   // Each slot can be EITHER a YouTube video OR a self-hosted file:
   //
   //   YouTube (recommended — no file size limits, click to play):
@@ -77,6 +84,8 @@ const PHOTOS = {
   reels: [
     { youtubeId: "4F3TPKbgKMM", title: "NIKE X BROPHY" },
     { youtubeId: "AYnDOeniP48", title: "FASHION SHOW 2026" },
+    { },   // ← NEW slot: replace with { youtubeId: "VIDEO_ID", title: "TITLE" }
+    { },   // ← NEW slot: replace with { youtubeId: "VIDEO_ID", title: "TITLE" }
   ],
 
   // ── MY FAVORITES ─────────────────────────────────────────
@@ -101,6 +110,48 @@ covers: {
   events:      { src: "70.jpg", alt: "Events cover" },
 },
   
+  // ── BROPHY STAMPEDE (row on the homepage + its own page) ──
+  // Files go in images/stampede/ (photos AND videos together).
+  // "featured" = the 2 vertical videos beside the text on the homepage.
+  // "gallery"  = everything on the "See More Work" page (photos + videos).
+  stampede: {
+    // 👇 CHANGE THE TITLE & DESCRIPTION HERE
+    title: "Brophy Stampede",
+    description: "Over the past two years, I've helped make promotional content and mixtapes for the Brophy Stampede to promote school events. Take a look at some of my favorite pieces.",
+    instagram: "https://www.instagram.com/brophystampede/",
+    // 👇 the 2 homepage videos: just rename src (video) and poster (thumbnail)
+    featured: [
+      { src: "mixtape-1.mp4", poster: "mixtape-1.jpg" },
+      { src: "mixtape-2.mp4", poster: "mixtape-2.jpg" },
+    ],
+    // 👇 "See More Work" page. To add more, copy any line and change the names.
+    gallery: [
+      { video: "promo-1.mp4", poster: "promo-1.jpg", orientation: "portrait" },
+      { video: "promo-2.mp4", poster: "promo-2.jpg", orientation: "portrait" },
+      { video: "promo-3.mp4", poster: "promo-3.jpg", orientation: "portrait" },
+      { video: "promo-4.mp4", poster: "promo-4.jpg", orientation: "portrait" },
+      { video: "promo-5.mp4", poster: "promo-5.jpg", orientation: "portrait" },
+      { src: "1.jpg", alt: "Photo 1" },
+      { src: "2.jpg", alt: "Photo 2" },
+      { src: "3.jpg", alt: "Photo 3" },
+      { src: "4.jpg", alt: "Photo 4" },
+      { src: "5.jpg", alt: "Photo 5" },
+    ],
+  },
+
+  // ── REAL ESTATE (row on the homepage) ─────────────────────
+  // Files go in images/realestate/ . The 2 vertical videos beside the text.
+  // The real estate portfolio itself (by agent / company) is at the bottom: "realestate".
+  realestateHome: {
+    // 👇 CHANGE THE TITLE & DESCRIPTION HERE
+    title: "Real Estate",
+    description: "I create listing videos, listing photos, and personal brand promotional content for real estate agents and teams. Whether you're launching a new listing or building your brand, I'll help you stand out.",
+    featured: [
+      { src: "listing-1.mp4", poster: "listing-1.jpg" },
+      { src: "listing-2.mp4", poster: "listing-2.jpg" },
+    ],
+  },
+
   // ── PORTRAITURE PROJECTS ─────────────────────────────────
   // Each key is a project. The "cover" image is the first one
   // in the array — it shows on the Portraiture landing page.
@@ -614,6 +665,31 @@ covers: {
         { src: "20.jpg", alt: "Basketball 1", orientation:"landscape"   },        
         { src: "21.jpg", alt: "Basketball 1", orientation:"landscape"   },        
         { src: "22.jpg", alt: "Basketball 1", orientation:"landscape"   },
+      ],
+    },
+
+  },
+
+  // ── REAL ESTATE PORTFOLIO (one project per agent / company) ─
+  // Photos + videos for each go in images/realestate/<project-key>/
+
+  realestate: {
+
+    "agent-one": {
+      title: "Coming Soon",
+      year: "2026",
+      cover: "1.jpg",
+      photos: [
+        { video: "tour-1.mp4", poster: "tour-1.jpg", orientation: "landscape" },
+        { video: "tour-2.mp4", poster: "tour-2.jpg", orientation: "landscape" },
+        { video: "tour-3.mp4", poster: "tour-3.jpg", orientation: "landscape" },
+        { video: "tour-4.mp4", poster: "tour-4.jpg", orientation: "landscape" },
+        { video: "tour-5.mp4", poster: "tour-5.jpg", orientation: "landscape" },
+        { src: "1.jpg", alt: "Photo 1" },
+        { src: "2.jpg", alt: "Photo 2" },
+        { src: "3.jpg", alt: "Photo 3" },
+        { src: "4.jpg", alt: "Photo 4" },
+        { src: "5.jpg", alt: "Photo 5" },
       ],
     },
 
