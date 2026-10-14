@@ -81,11 +81,11 @@ const PHOTOS = {
   //     .mp4 goes in videos/, poster thumbnail (optional) in images/reels/
   //
   // Leave a slot as { } for a "Video Coming Soon" placeholder.
-  reels: [
+  reels: [ 
     { youtubeId: "4F3TPKbgKMM", title: "NIKE X BROPHY" },
     { youtubeId: "AYnDOeniP48", title: "FASHION SHOW 2026" },
-    { },   // ← NEW slot: replace with { youtubeId: "VIDEO_ID", title: "TITLE" }
-    { },   // ← NEW slot: replace with { youtubeId: "VIDEO_ID", title: "TITLE" }
+    { youtubeId: "Of3eXICoGLM", title: "BROPHY HYPE REEL" },  
+    { youtubeId: "Of3eXICoGLM", title: "BROPHY HYPE REEL" },   
   ],
 
   // ── MY FAVORITES ─────────────────────────────────────────
@@ -121,8 +121,8 @@ covers: {
     instagram: "https://www.instagram.com/brophystampede/",
     // 👇 the 2 homepage videos: just rename src (video) and poster (thumbnail)
     featured: [
-      { src: "mixtape-1.mp4", poster: "mixtape-1.jpg" },
-      { src: "mixtape-2.mp4", poster: "mixtape-2.jpg" },
+      { src: "eteique.mov", poster: "mixtape-1.jpg" },
+      { src: "untitled.mov", poster: "mixtape-2.jpg" },
     ],
     // 👇 "See More Work" page. To add more, copy any line and change the names.
     gallery: [
