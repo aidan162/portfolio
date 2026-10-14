@@ -688,7 +688,7 @@
   #realestate .feature-desc { color: rgba(245,242,237,0.6); }
   .feature-actions { display: flex; align-items: center; gap: 1.8rem; flex-wrap: wrap; }
   a.btn-submit { text-decoration: none; }
-  .feature-videos { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; width: 100%; max-width: 560px; justify-self: end; }
+  .feature-videos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; width: 100%; max-width: 680px; justify-self: end; }
   .vid-card {
     position: relative; overflow: hidden; border-radius: 3px; aspect-ratio: 9 / 16;
     background: linear-gradient(150deg, #201a16 0%, #362c22 100%);
@@ -1180,7 +1180,7 @@
 
   /* Shared video + gallery helpers (photos AND videos, any project) */
   function videoTag(src, poster) {
-    return `<video controls playsinline preload="metadata"${poster ? ` poster="${poster}"` : ''}><source src="${src}#t=0.1" type="video/mp4" onerror="vidMissing(this)"></video>`;
+    return `<video controls playsinline preload="metadata"${poster ? ` poster="${poster}"` : ''}><source src="${src}#t=0.1" onerror="vidMissing(this)"></video>`;
   }
 
   /* If a video file isn't found yet, show a "Coming Soon" box instead of a black one */
@@ -1213,7 +1213,7 @@
       if (!cfg) return;
       document.getElementById(id + '-title').textContent = cfg.title || '';
       document.getElementById(id + '-desc').textContent = cfg.description || '';
-      document.getElementById(id + '-videos').innerHTML = [0, 1].map(i => {
+      document.getElementById(id + '-videos').innerHTML = [0, 1, 2].map(i => {
         const v = (cfg.featured || [])[i] || {};
         if (!v.src) return `<div class="vid-card"><div class="reel-placeholder-text">Video Coming Soon</div></div>`;
         const p = f => `images/${folder}/${f}`;

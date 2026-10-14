@@ -112,17 +112,18 @@ covers: {
   
   // ── BROPHY STAMPEDE (row on the homepage + its own page) ──
   // Files go in images/stampede/ (photos AND videos together).
-  // "featured" = the 2 vertical videos beside the text on the homepage.
+  // "featured" = the 3 vertical videos beside the text on the homepage.
   // "gallery"  = everything on the "See More Work" page (photos + videos).
   stampede: {
     // 👇 CHANGE THE TITLE & DESCRIPTION HERE
     title: "Brophy Stampede",
     description: "Over the past two years, I've helped make promotional content and mixtapes for the Brophy Stampede to promote school events. Take a look at some of my favorite pieces.",
     instagram: "https://www.instagram.com/brophystampede/",
-    // 👇 the 2 homepage videos: just rename src (video) and poster (thumbnail)
+    // 👇 the 3 homepage videos: just rename src (video) and poster (thumbnail)
     featured: [
       { src: "eteique.mov", poster: "mixtape-1.jpg" },
       { src: "Untitled.mov", poster: "mixtape-2.jpg" },
+      { src: "mixtape-3.mov", poster: "mixtape-3.jpg" },
     ],
     // 👇 "See More Work" page. To add more, copy any line and change the names.
     gallery: [
@@ -142,7 +143,7 @@ covers: {
   },
 
   // ── REAL ESTATE (row on the homepage) ─────────────────────
-  // Files go in images/realestate/ . The 2 vertical videos beside the text.
+  // Files go in images/realestate/ . The 3 vertical videos beside the text.
   // The real estate portfolio itself (by agent / company) is at the bottom: "realestate".
   realestateHome: {
     // 👇 CHANGE THE TITLE & DESCRIPTION HERE
@@ -151,6 +152,7 @@ covers: {
     featured: [
       { src: "listing-1.mov", poster: "listing-1.jpg" },
       { src: "listing-2.mov", poster: "listing-2.jpg" },
+      { src: "listing-3.mov", poster: "listing-3.jpg" },
     ],
   },
 
