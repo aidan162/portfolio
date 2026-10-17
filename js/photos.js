@@ -123,7 +123,7 @@ covers: {
     featured: [
       { src: "eteique.mov", poster: "mixtape-1.jpg" },
       { src: "Untitled.mov", poster: "mixtape-2.jpg" },
-      { src: "mixtape-3.mov", poster: "mixtape-3.jpg" },
+      { src: "5.mov", poster: "mixtape-3.jpg" },
     ],
     // 👇 "See More Work" page. To add more, copy any line and change the names.
     gallery: [
