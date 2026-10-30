@@ -117,7 +117,7 @@ covers: {
   stampede: {
     // 👇 CHANGE THE TITLE & DESCRIPTION HERE
     title: "Brophy Stampede",
-    description: "Over the past two years, I've helped make promotional content and mixtapes for the Brophy Stampede to promote school events. Take a look at some of my favorite pieces.",
+    description: "Over the past two years, I've created promotional content and mixtapes for the Brophy Stampede to promote school events. This year, I lead a team of five media creators, helping produce content that has generated over 500,000 views per month for multiple consecutive months. Take a look at some of my favorite pieces.",
     instagram: "https://www.instagram.com/brophystampede/",
     // 👇 the 3 homepage videos: just rename src (video) and poster (thumbnail)
     featured: [
