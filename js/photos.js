@@ -265,13 +265,13 @@ covers: {
   nature: {
 
     "desert-light": {
-      title: "Desert Light",
-      year: "2024",
-      cover: "desert-1.svg",
+      title: "France",
+      year: "2026",
+      cover: "1.mov",
       photos: [
-        { src: "desert-1.svg", alt: "Desert light 1" },
-        { src: "desert-2.svg", alt: "Desert light 2" },
-        { src: "desert-3.svg", alt: "Desert light 3" },
+        { src: "1.mov", alt: "Desert light 1" },
+        { src: "2.mov", alt: "Desert light 2" },
+        { src: "3.mov", alt: "Desert light 3" },
         { src: "desert-4.svg", alt: "Desert light 4" },
         { src: "desert-5.svg", alt: "Desert light 5" },
         { src: "desert-6.svg", alt: "Desert light 6" },
