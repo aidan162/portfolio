@@ -269,9 +269,9 @@ covers: {
       year: "2026",
       cover: "1.mov",
       photos: [
-        { src: "1.mov", alt: "Desert light 1" },
-        { src: "2.mov", alt: "Desert light 2" },
-        { src: "3.mov", alt: "Desert light 3" },
+        { video: "1.mov", orientation: "landscape" },
+        { video: "2.mov", orientation: "landscape" },
+        { video: "3.mov", orientation: "landscape" },
         { src: "desert-4.svg", alt: "Desert light 4" },
         { src: "desert-5.svg", alt: "Desert light 5" },
         { src: "desert-6.svg", alt: "Desert light 6" },
