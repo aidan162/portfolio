@@ -62,8 +62,15 @@ const PHOTOS = {
   //   2. Add an entry below for each one
   // Leave this array empty to show placeholder pills instead.
   clients: [
-    // { src: "logo-brophy.png", name: "Brophy Prep" },
-    // { src: "logo-arcadia.png", name: "Arcadia High School" },
+    { src: "brophyprep.png", name: "Brophy Prep" },
+    { src: "arcadia.png", name: "Arcadia High School" },
+    { src: "Deal.png", name: "DEAL Club" },
+    { src: "nike.png", name: "Nike" },
+    { src: "Roundup.png", name: "Brophy Round Up NewsPaper" },
+    { src: "Arcadiafootball.png", name: "Arcadia High School" },
+    { src: "Broncolog.png", name: "Arcadia High School" },
+    { src: "arcadianews.png", name: "Arcadia Newspaper" },
+
   ],
 
   // ── VIDEO REELS (4 slots, shown under My Favorites) ───────
