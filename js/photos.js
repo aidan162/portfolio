@@ -66,7 +66,6 @@ const PHOTOS = {
     { src: "arcadia.png", name: "Arcadia High School" },
     { src: "Deal.png", name: "DEAL Club" },
     { src: "nike.png", name: "Nike" },
-    { src: "Roundup.png", name: "Brophy Round Up NewsPaper" },
     { src: "Arcadiafootball.png", name: "Arcadia High School" },
     { src: "Broncolog.png", name: "Arcadia High School" },
     { src: "arcadianews.png", name: "Arcadia Newspaper" },
