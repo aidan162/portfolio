@@ -91,7 +91,7 @@ const PHOTOS = {
     { youtubeId: "4F3TPKbgKMM", title: "NIKE X BROPHY" },
     { youtubeId: "AYnDOeniP48", title: "FASHION SHOW 2026" },
     { youtubeId: "Of3eXICoGLM", title: "BROPHY HYPE REEL" },  
-    { youtubeId: "Of3eXICoGLM", title: "BROPHY HYPE REEL" },   
+    { youtubeId: "a_sphqdMAl8", title: "HOMECOMING HYPE REEL" },   
   ],
 
   // ── MY FAVORITES ─────────────────────────────────────────
